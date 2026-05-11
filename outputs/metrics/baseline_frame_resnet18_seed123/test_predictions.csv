@@ -1,0 +1,25 @@
+video_id,group_id,label,score_lie
+trial_lie_007.mp4,Andrea Sneiderman,1,0.6170567870140076
+trial_lie_008.mp4,Andrea Sneiderman,1,0.5819374322891235
+trial_lie_009.mp4,Andrea Sneiderman,1,0.5044378042221069
+trial_lie_010.mp4,Andrea Sneiderman,1,0.5230823159217834
+trial_lie_011.mp4,Andrea Sneiderman,1,0.3936571478843689
+trial_lie_012.mp4,Andrea Sneiderman,1,0.4966379404067993
+trial_lie_013.mp4,Andrea Sneiderman,1,0.4359074831008911
+trial_lie_033.mp4,Jamie Hood,1,0.341240793466568
+trial_lie_034.mp4,Jamie Hood,1,0.4696221649646759
+trial_lie_037.mp4,Crystal Mangum,1,0.38513725996017456
+trial_lie_038.mp4,Crystal Mangum,1,0.3192223608493805
+trial_lie_039.mp4,Crystal Mangum,1,0.3479349911212921
+trial_lie_040.mp4,Crystal Mangum,1,0.3364277482032776
+trial_truth_003.mp4,Andrea Sneiderman,0,0.5570756196975708
+trial_truth_004.mp4,Andrea Sneiderman,0,0.5800987482070923
+trial_truth_005.mp4,Andrea Sneiderman,0,0.40616708993911743
+trial_truth_006.mp4,Andrea Sneiderman,0,0.44397568702697754
+trial_truth_007.mp4,Andrea Sneiderman,0,0.4606042802333832
+trial_truth_023.mp4,Alan Newton,0,0.4002867639064789
+trial_truth_039.mp4,Jamie Hood,0,0.48176488280296326
+trial_truth_040.mp4,Jamie Hood,0,0.1554674208164215
+trial_truth_051.mp4,Owen Labrie,0,0.25874581933021545
+trial_truth_053.mp4,Crystal Mangum,0,0.3257066011428833
+trial_truth_060.mp4,Crystal Mangum,0,0.42645740509033203

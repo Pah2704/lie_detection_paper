@@ -1,0 +1,33 @@
+subject_id,num_videos,truth,lie,lie_ratio
+Alan Newton,1,1,0,0.0
+Amanda Hayes,9,3,6,0.6666666666666666
+Andrea Sneiderman,12,5,7,0.5833333333333334
+Bessman Okafor,8,8,0,0.0
+Candace Conti,3,0,3,1.0
+Carlos Miller,4,0,4,1.0
+Carlos Riley,1,1,0,0.0
+Charles and Kimberly Matthews,5,5,0,0.0
+Chris Ochoa,2,2,0,0.0
+Crystal Mangum,6,2,4,0.6666666666666666
+Donna Scrivo,2,1,1,0.5
+"Dyches, Hall, and Hopkins trial",1,0,1,1.0
+Edgar Collazo,1,1,0,0.0
+Fernando Bermudez,2,2,0,0.0
+James Boyd,4,4,0,0.0
+Jamie Hood,4,2,2,0.5
+Jodi Arias,33,11,22,0.6666666666666666
+Jonathan Santillan,1,1,0,0.0
+Kelly Burke,1,0,1,1.0
+Ken Wyniemko,2,2,0,0.0
+Lance Armstrong,1,0,1,1.0
+Marissa Devault,3,0,3,1.0
+Martin Macneill,1,1,0,0.0
+Marvin Anderson,1,1,0,0.0
+Michael Dunn,1,0,1,1.0
+Mitchelle Blair,3,2,1,0.3333333333333333
+Owen Labrie,1,1,0,0.0
+Randy Mills,1,1,0,0.0
+Robert Dziekanski,3,0,3,1.0
+Scott Peterson,1,0,1,1.0
+Steven Barnes,1,1,0,0.0
+The innocence project,2,2,0,0.0

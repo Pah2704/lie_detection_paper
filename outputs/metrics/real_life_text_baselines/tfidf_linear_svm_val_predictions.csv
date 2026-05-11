@@ -1,0 +1,25 @@
+video_id,group_id,label,score_lie
+trial_lie_001.mp4,Amanda Hayes,1,0.9098411201395806
+trial_lie_002.mp4,Amanda Hayes,1,-0.27408249696961334
+trial_lie_003.mp4,Amanda Hayes,1,0.055152567458238225
+trial_lie_004.mp4,Amanda Hayes,1,-0.18932302260756767
+trial_lie_005.mp4,Amanda Hayes,1,-0.6422367995117494
+trial_lie_006.mp4,Amanda Hayes,1,-0.20578248448785202
+trial_lie_036.mp4,Marissa Devault,1,0.12417586442966581
+trial_lie_050.mp4,Marissa Devault,1,-0.06197844047428387
+trial_lie_051.mp4,Marissa Devault,1,0.055152567458238225
+trial_lie_059.mp4,Candace Conti,1,-0.44052360206849506
+trial_lie_060.mp4,Candace Conti,1,0.031206785902242393
+trial_lie_061.mp4,Candace Conti,1,0.6333961840939799
+trial_truth_029.mp4,Bessman Okafor,0,0.13456815884678064
+trial_truth_031.mp4,Bessman Okafor,0,0.0007169450856197995
+trial_truth_032.mp4,Bessman Okafor,0,-0.31826390541827343
+trial_truth_033.mp4,Bessman Okafor,0,-0.1296935493133709
+trial_truth_034.mp4,Bessman Okafor,0,-0.5643863479558009
+trial_truth_035.mp4,Bessman Okafor,0,-0.03644047199657184
+trial_truth_036.mp4,Bessman Okafor,0,-0.9116046570985765
+trial_truth_038.mp4,Bessman Okafor,0,0.026067577589186444
+trial_truth_050.mp4,Carlos Riley,0,-0.22114923083882065
+trial_truth_057.mp4,Amanda Hayes,0,-0.5249860408874039
+trial_truth_058.mp4,Amanda Hayes,0,-0.38284532324410603
+trial_truth_059.mp4,Amanda Hayes,0,-0.30574167198208246

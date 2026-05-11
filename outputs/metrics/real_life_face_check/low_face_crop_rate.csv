@@ -1,0 +1,1 @@
+video_id,label,group_id,source_video_path,face_video_path,status,total_frames,detect_attempts,detected_frames,reused_frames,center_frames,face_crop_rate,new_detection_rate,fps,output_size,detect_every,margin

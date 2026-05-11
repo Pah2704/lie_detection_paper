@@ -1,0 +1,71 @@
+{
+  "seed": 42,
+  "stratified": false,
+  "balanced_search": true,
+  "subjects": {
+    "train": [
+      "Carlos Miller",
+      "Charles and Kimberly Matthews",
+      "Chris Ochoa",
+      "Donna Scrivo",
+      "Dyches, Hall, and Hopkins trial",
+      "Edgar Collazo",
+      "Fernando Bermudez",
+      "James Boyd",
+      "Jodi Arias",
+      "Jonathan Santillan",
+      "Kelly Burke",
+      "Ken Wyniemko",
+      "Lance Armstrong",
+      "Martin Macneill",
+      "Marvin Anderson",
+      "Michael Dunn",
+      "Mitchelle Blair",
+      "Randy Mills",
+      "Robert Dziekanski",
+      "Scott Peterson",
+      "Steven Barnes",
+      "The innocence project"
+    ],
+    "val": [
+      "Amanda Hayes",
+      "Bessman Okafor",
+      "Candace Conti",
+      "Carlos Riley",
+      "Marissa Devault"
+    ],
+    "test": [
+      "Alan Newton",
+      "Andrea Sneiderman",
+      "Crystal Mangum",
+      "Jamie Hood",
+      "Owen Labrie"
+    ]
+  },
+  "splits": {
+    "train": {
+      "num_videos": 73,
+      "num_subjects": 22,
+      "label_counts": {
+        "0": 37,
+        "1": 36
+      }
+    },
+    "val": {
+      "num_videos": 24,
+      "num_subjects": 5,
+      "label_counts": {
+        "1": 12,
+        "0": 12
+      }
+    },
+    "test": {
+      "num_videos": 24,
+      "num_subjects": 5,
+      "label_counts": {
+        "1": 13,
+        "0": 11
+      }
+    }
+  }
+}

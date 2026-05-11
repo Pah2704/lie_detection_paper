@@ -1,0 +1,28 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+ai_env/
+
+# Dataset files are not committed.
+data/*.zip
+data/raw/
+data/processed/faces/
+data/processed/flow/
+
+# Keep split CSV/JSON, ignore generated media/checkpoints.
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wav
+*.mp3
+
+# Outputs: commit metrics/report text, not checkpoints/images/archive.
+outputs/archive/
+outputs/checkpoints/
+outputs/figures/
+*.pt
+*.pth
+*.ckpt
