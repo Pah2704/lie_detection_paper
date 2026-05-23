@@ -1,8 +1,10 @@
 # Report Outline: Micro-Expression for Lie Detection
 
-> Pham vi thuc nghiem chinh: tat ca mo hinh duoc train/validation/test tren DOLOS theo 3-fold. Bao cao chot ket qua tren DOLOS-only, dung strict clean protocol voi `faces_224_clean`, `optflow_clean` va `face_valid`. Real-life khong nam trong ket qua chinh; neu nhac den thi chi de o phu luc/future work nhu mot cross-domain exploratory test.
+> Bao cao hoan chinh da duoc viet tai `docs/course_report_micro_expression_lie_detection.md`.
 
-> Cap nhat clean rerun: audit tren `faces_224_clean` van flag suspect contamination heuristic cao (`87.41%` clip), nen bao cao chi dung **strict clean rerun** trong bang chinh, khong tron voi mixed-cache final cu. Ket qua chinh dung `outputs/metrics/final_report_clean_cross_raw_ba`.
+> Pham vi thuc nghiem: tat ca mo hinh duoc train/validation/test tren DOLOS theo 3-fold. Bao cao chot ket qua tren DOLOS-only, dung clean protocol voi `faces_224_clean`, `optflow_clean` va `face_valid`.
+
+> Cap nhat final moi nhat: ket qua chinh dung `outputs/metrics/final_report_clean_temporal_mask_soft_cross`, final method `ensemble_raw_balanced_accuracy`, AUC `65.43`, calibrated BA `60.54`, calibrated F1 Lie `61.39`.
 
 ## 0. Trang bia va tom tat
 
@@ -48,7 +50,7 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_results_summary.md
 - Muc tieu hoc may: hoc ham `f(video, audio) -> P(lie)`.
 - Rang buoc bao cao:
   - DOLOS la dataset chinh de train, validation va test.
-  - Khong dung Real-life trong ket qua chinh.
+  - Tat ca model selection, threshold calibration va ensemble weight search deu thuc hien tren cac split DOLOS.
 
 ### 1.3 Muc tieu
 - Xay dung pipeline tien xu ly cho face, optical flow va audio.
@@ -161,7 +163,7 @@ Nguon quy dinh: ROSE Lab DOLOS Terms and Conditions, `https://rose1.ntu.edu.sg/d
 - Train split: hoc tham so mo hinh.
 - Validation split: chon checkpoint, calibrate threshold, grid search ensemble weight.
 - Test split: bao cao ket qua chinh.
-- Khong dung Real-life trong main result, khong tune bat ky tham so nao tren Real-life.
+- Khong bo sung dataset ngoai DOLOS vao ket qua chinh.
 
 **[Table 3.2 - DOLOS evaluation protocol]**
 
@@ -354,7 +356,7 @@ Nen ve gom:
 - Model selection: validation AUC.
 - Threshold calibration: DOLOS validation balanced accuracy.
 - Ensemble weight search: DOLOS validation.
-- Khong dung Real-life trong thiet lap chinh.
+- Tat ca bao cao metric chinh deu lay tu DOLOS test folds.
 
 **[Table 6.1 - Experimental protocol]**
 
@@ -613,7 +615,7 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_error_by_contamina
 - Hoan thien face-track clustering va visual quality mask.
 - Them text/transcript stream.
 - Multi-seed va confidence interval.
-- Exploratory cross-domain Real-life neu co them thoi gian, nhung khong dua vao ket luan chinh cua bao cao nay.
+- Danh gia kha nang generalization bang mot protocol ngoai mien rieng neu co them thoi gian.
 - Self-supervised pretraining tren unlabeled face videos.
 
 ---
@@ -621,12 +623,11 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_error_by_contamina
 ## 11. Tai lieu tham khao
 
 1. Guo et al. "Audio-Visual Deception Detection: DOLOS Dataset and Parameter-Efficient Crossmodal Learning." ICCV 2023.
-2. Perez-Rosas et al. "Deception Detection using Real-life Trial Data." ICMI 2015.
-3. Ekman. "Telling Lies." 1985.
-4. Dosovitskiy et al. "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale." ICLR 2021.
-5. Baevski et al. "wav2vec 2.0." NeurIPS 2020.
-6. He et al. "Deep Residual Learning for Image Recognition." CVPR 2016.
-7. Lugaresi et al. "MediaPipe: A Framework for Building Perception Pipelines." 2019.
+2. Ekman. "Telling Lies." 1985.
+3. Dosovitskiy et al. "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale." ICLR 2021.
+4. Baevski et al. "wav2vec 2.0." NeurIPS 2020.
+5. He et al. "Deep Residual Learning for Image Recognition." CVPR 2016.
+6. Lugaresi et al. "MediaPipe: A Framework for Building Perception Pipelines." 2019.
 
 ---
 
@@ -659,20 +660,6 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_error_by_contamina
 | `outputs/metrics/face_contamination_audit_clean/face_contamination_audit.md` | Section 8.3 clean contamination audit |
 | `outputs/metrics/prediction_level_ensemble_retrain_clean_cross_final/prediction_level_ensemble_results.md` | Section 7 |
 
-### Appendix D. Exploratory Real-life / future work
-- Real-life chi nen de nhu exploratory cross-domain test, khong nam trong key results va khong dung lam ket luan chinh.
-- Neu giang vien yeu cau minh hoa kha nang cross-domain, dua vao phu luc voi caveat ro rang: domain shift lon, ket qua khong on dinh va khong duoc tune tren Real-life.
-- Artifact tham khao: `outputs/metrics/real_life_cross_domain_retrain_clean_cross_final/final_report/real_life_cross_domain_report.md`.
-- Scripts lien quan:
-  - `src/data/real_life_prepare.py`
-  - `src/evaluate_real_life_checkpoints.py`
-  - `src/report_real_life_cross_domain.py`
-
-| Scope | Method | AUC | BA@thr | Note |
-| --- | --- | ---: | ---: | --- |
-| all_121 | clean gated_prior_kl score mean | 54.51 | 52.77 | Exploratory only |
-| all_121 | clean cross_attention_auc score mean | 30.41 | 33.29 | Domain-shift failure case |
-
 ---
 
 ## 13. Checklist bang bieu, hinh anh, do thi
@@ -695,7 +682,6 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_error_by_contamina
 - Table 8.1: Error by host.
 - Table 8.2: Error by episode.
 - Table 8.3: Contamination analysis.
-- Optional Appendix D table: Exploratory Real-life summary, only if needed.
 
 ### Figures
 - Figure 1.1: Problem pipeline.
@@ -711,7 +697,6 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_error_by_contamina
 - Figure 5.4: Prediction-level ensemble.
 - Figure 8.1: Contamination examples.
 - Figure 8.2: Confusion matrices per fold.
-- Optional Appendix D figure: Cross-domain protocol, only if Real-life appendix is included.
 
 ### Graphs
 - Graph 3.1: DOLOS label distribution.
@@ -728,7 +713,6 @@ Nguon: `outputs/metrics/final_report_clean_cross_raw_ba/final_error_by_contamina
 - Graph 8.3: Episode error heatmap.
 - Graph 8.4: Prediction outcome counts.
 - Graph 8.5: Contamination metric comparison.
-- Optional Appendix D graphs: Real-life method comparison, variance, score distribution, ROC and confusion matrix.
 
 ---
 
@@ -764,17 +748,6 @@ Tat ca file da duoc sinh tu `src/report_figures.py`. Moi hinh co ca `.png` va `.
 | Graph 8.3 | `docs/figures/report/graph07_episode_error_heatmap.png` |
 | Graph 8.4 | `docs/figures/report/graph15_dolos_error_type_counts.png` |
 | Graph 8.5 | `docs/figures/report/graph16_contamination_metric_comparison.png` |
-
-Optional Appendix D files, khong dua vao main results neu khong can:
-
-| Appendix item | Generated file |
-| --- | --- |
-| Cross-domain protocol | `docs/figures/report/fig12_cross_domain_protocol.png` |
-| Real-life method comparison | `docs/figures/report/graph09_reallife_method_comparison.png` |
-| Real-life per-fold variance | `docs/figures/report/graph10_reallife_per_fold_variance.png` |
-| Real-life score distribution | `docs/figures/report/graph18_reallife_score_distribution.png` |
-| Real-life ROC curve | `docs/figures/report/graph19_reallife_roc_curve.png` |
-| Real-life confusion matrix | `docs/figures/report/graph20_reallife_confusion_matrix_best.png` |
 
 Luu y compliance: cac hinh schematic khong dung raw frame/crop tu DOLOS. `fig05_face_valid_timeline` chi hien thi metadata face-valid, khong hien thi anh video.
 

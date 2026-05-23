@@ -15,8 +15,7 @@ from sklearn.metrics import average_precision_score, balanced_accuracy_score, co
 
 ROOT = Path(".")
 DEFAULT_OUT_DIR = Path("docs/figures/report")
-FINAL_REPORT_DIR = Path("outputs/metrics/final_report_clean_cross_raw_ba")
-REAL_LIFE_REPORT_DIR = Path("outputs/metrics/real_life_cross_domain_retrain_clean_cross_final/final_report")
+FINAL_REPORT_DIR = Path("outputs/metrics/final_report_clean_temporal_mask_soft_cross")
 
 
 FIGURE_SPECS = [
@@ -31,7 +30,7 @@ FIGURE_SPECS = [
     ("fig09_cross_attention_block", "Cross-attention block"),
     ("fig10_gated_logit_fusion", "Gated logit fusion"),
     ("fig11_prediction_level_ensemble", "Prediction-level ensemble"),
-    ("fig12_cross_domain_protocol", "Optional appendix: cross-domain protocol"),
+    ("fig12_dolos_protocol", "DOLOS-only evaluation protocol"),
     ("graph01_dolos_label_distribution", "DOLOS label distribution"),
     ("graph02_dolos_method_comparison", "DOLOS method comparison"),
     ("graph03_dolos_per_fold_auc_ba", "DOLOS per-fold AUC/BA"),
@@ -40,8 +39,6 @@ FIGURE_SPECS = [
     ("graph06_error_by_host", "Error by host"),
     ("graph07_episode_error_heatmap", "Worst episode BA heatmap"),
     ("graph08_confusion_matrices", "Final ensemble confusion matrices"),
-    ("graph09_reallife_method_comparison", "Optional appendix: Real-life method comparison"),
-    ("graph10_reallife_per_fold_variance", "Optional appendix: Real-life per-fold variance"),
     ("graph11_dolos_score_distribution", "DOLOS final score distribution"),
     ("graph12_dolos_roc_curve", "DOLOS final ROC curves"),
     ("graph13_dolos_pr_curve", "DOLOS final precision-recall curve"),
@@ -49,9 +46,6 @@ FIGURE_SPECS = [
     ("graph15_dolos_error_type_counts", "DOLOS error type counts"),
     ("graph16_contamination_metric_comparison", "Contamination metric comparison"),
     ("graph17_dolos_score_by_host", "DOLOS score by host"),
-    ("graph18_reallife_score_distribution", "Optional appendix: Real-life score distribution"),
-    ("graph19_reallife_roc_curve", "Optional appendix: Real-life ROC curves"),
-    ("graph20_reallife_confusion_matrix_best", "Optional appendix: Real-life best confusion matrices"),
 ]
 
 
@@ -233,8 +227,9 @@ def preprocessing_pipeline(out_dir: Path, dpi: int) -> None:
 
 
 def face_valid_timeline(out_dir: Path, dpi: int) -> None:
-    path = Path("data/processed/faces_224_clean/real_life/face_valid/trial_lie_001.csv")
-    if path.exists():
+    candidates = sorted(Path("data/processed/faces_224_clean/dolos/face_valid").glob("*.csv"))
+    if candidates:
+        path = candidates[0]
         df = pd.read_csv(path).head(180)
         x = df["frame_index"] if "frame_index" in df.columns else np.arange(len(df))
         y = df["face_valid"].astype(float) if "face_valid" in df.columns else np.ones(len(df))
@@ -351,17 +346,17 @@ def prediction_level_ensemble(out_dir: Path, dpi: int) -> None:
     save(fig, out_dir, "fig11_prediction_level_ensemble", dpi)
 
 
-def cross_domain_protocol(out_dir: Path, dpi: int) -> None:
+def dolos_protocol(out_dir: Path, dpi: int) -> None:
     fig, ax = diagram_canvas(12, 4)
     add_box(ax, (0.05, 0.55), 0.22, 0.18, "DOLOS train\nlearn parameters", fc="#E8F2FA")
     add_box(ax, (0.34, 0.55), 0.22, 0.18, "DOLOS val\nselect checkpoint\nthreshold/weights", fc="#EAF6EA", fontsize=9)
     add_box(ax, (0.63, 0.55), 0.18, 0.18, "DOLOS test\nin-domain result", fc="#FFF1E6", fontsize=9)
-    add_box(ax, (0.63, 0.18), 0.25, 0.16, "Real-life test\ncross-domain only\nno fine-tune", fc="#F8EAEA", fontsize=9)
+    add_box(ax, (0.63, 0.18), 0.25, 0.16, "Final report\n3-fold DOLOS mean", fc="#F8EAEA", fontsize=9)
     add_arrow(ax, (0.27, 0.64), (0.34, 0.64))
     add_arrow(ax, (0.56, 0.64), (0.63, 0.64))
     add_arrow(ax, (0.45, 0.55), (0.68, 0.34), COLORS["red"])
-    ax.set_title("Evaluation Protocol: DOLOS First, Real-life Cross-Test Afterward", y=0.92)
-    save(fig, out_dir, "fig12_cross_domain_protocol", dpi)
+    ax.set_title("Evaluation Protocol: DOLOS 3-Fold Only", y=0.92)
+    save(fig, out_dir, "fig12_dolos_protocol", dpi)
 
 
 def graph_label_distribution(out_dir: Path, dpi: int) -> None:
@@ -410,7 +405,7 @@ def graph_dolos_method_comparison(out_dir: Path, dpi: int) -> None:
 
 def graph_per_fold(out_dir: Path, dpi: int) -> None:
     df = pd.read_csv(FINAL_REPORT_DIR / "final_per_fold_metrics.csv")
-    df = df[df["method"] == "ensemble_raw_auc_roc"].copy()
+    df = df[df["method"] == "ensemble_raw_balanced_accuracy"].copy()
     data = df[["fold", "auc_roc", "calibrated_balanced_accuracy"]].melt("fold", var_name="metric", value_name="value")
     data["percent"] = pct(data["value"])
     data["metric"] = data["metric"].map({"auc_roc": "AUC", "calibrated_balanced_accuracy": "Cal. BA"})
@@ -431,7 +426,7 @@ def graph_ours_vs_paper(out_dir: Path, dpi: int) -> None:
         "DOLOS paper PAVF + Multi-task",
         "Cross-attention AUC baseline",
         "Gated logits prior-KL",
-        "Final ensemble raw-AUC",
+        "Final ensemble raw-BA",
     ]
     df = df[df["method"].isin(keep)].copy()
     df["method"] = pd.Categorical(df["method"], categories=keep, ordered=True)
@@ -460,6 +455,28 @@ def graph_stream_ablation(out_dir: Path, dpi: int) -> None:
     }
     df = df[df["stream"].isin(keep)].copy()
     df["stream_label"] = df["stream"].map(labels)
+    extra_rows = []
+    summaries = [
+        ("Soft temporal cross", "outputs/metrics/retrain_clean_dolos_three_stream_auc_soft_temporal_penalty/fold3_seed42_summary.json"),
+        ("Gated prior-KL mask", "outputs/metrics/retrain_clean_dolos_three_stream_gated_logits_prior_kl_temporal_mask/fold3_seed42_summary.json"),
+    ]
+    for label, summary_path in summaries:
+        path = Path(summary_path)
+        if not path.exists():
+            continue
+        summary = pd.read_json(path, typ="series")
+        test_metrics = summary["test_metrics"]
+        cal_metrics = summary.get("test_metrics_calibrated_threshold", summary.get("calibrated_threshold_metrics", {}))
+        extra_rows.append(
+            {
+                "stream_label": label,
+                "best_val_auc_roc": float(summary["best_val_auc_roc"]),
+                "test_auc_roc": float(test_metrics["auc_roc"]),
+                "calibrated_balanced_accuracy": float(cal_metrics["balanced_accuracy"]),
+            }
+        )
+    if extra_rows:
+        df = pd.concat([df, pd.DataFrame(extra_rows)], ignore_index=True)
     data = df[["stream_label", "best_val_auc_roc", "test_auc_roc", "calibrated_balanced_accuracy"]].melt(
         "stream_label",
         var_name="metric",
@@ -507,7 +524,7 @@ def graph_episode_heatmap(out_dir: Path, dpi: int) -> None:
 
 def graph_confusion_matrices(out_dir: Path, dpi: int) -> None:
     df = pd.read_csv(FINAL_REPORT_DIR / "final_per_fold_metrics.csv")
-    df = df[df["method"] == "ensemble_raw_auc_roc"].copy()
+    df = df[df["method"] == "ensemble_raw_balanced_accuracy"].copy()
     fig, axes = plt.subplots(1, 3, figsize=(12, 4))
     for ax, (_, row) in zip(axes, df.iterrows(), strict=True):
         cm = np.asarray(ast.literal_eval(row["calibrated_confusion_matrix"]))
@@ -517,40 +534,6 @@ def graph_confusion_matrices(out_dir: Path, dpi: int) -> None:
         ax.set_ylabel("Actual")
     fig.suptitle("Final Ensemble Confusion Matrices", y=1.02, fontsize=14, weight="bold")
     save(fig, out_dir, "graph08_confusion_matrices", dpi)
-
-
-def graph_reallife_method_comparison(out_dir: Path, dpi: int) -> None:
-    df = pd.read_csv(REAL_LIFE_REPORT_DIR / "real_life_metrics.csv")
-    methods = ["ensemble_raw_auc_roc", "gated_prior_kl_3fold_score_mean", "cross_attention_auc_3fold_score_mean"]
-    df = df[(df["dataset_scope"] == "all_121") & (df["fold"] == "mean") & (df["method"].isin(methods))].copy()
-    order = methods
-    df["method"] = pd.Categorical(df["method"], categories=order, ordered=True)
-    df = df.sort_values("method")
-    data = df[["method", "auc_roc", "ba_threshold", "f1_lie_threshold"]].melt("method", var_name="metric", value_name="value")
-    data["percent"] = pct(data["value"])
-    data["metric"] = data["metric"].map({"auc_roc": "AUC", "ba_threshold": "BA", "f1_lie_threshold": "F1 Lie"})
-    fig, ax = plt.subplots(figsize=(12, 5))
-    sns.barplot(data=data, x="method", y="percent", hue="metric", ax=ax, palette=[COLORS["blue"], COLORS["green"], COLORS["orange"]], errorbar=None)
-    ax.set_title("Real-life Cross-Domain Results (all_121)")
-    ax.set_xlabel("")
-    ax.set_ylabel("Score (%)")
-    ax.tick_params(axis="x", rotation=15)
-    save(fig, out_dir, "graph09_reallife_method_comparison", dpi)
-
-
-def graph_reallife_per_fold(out_dir: Path, dpi: int) -> None:
-    df = pd.read_csv(REAL_LIFE_REPORT_DIR / "real_life_metrics.csv")
-    df = df[(df["dataset_scope"] == "all_121") & (df["method"] == "ensemble_raw_auc_roc") & (df["fold"].isin(["fold1", "fold2", "fold3"]))].copy()
-    data = df[["fold", "auc_roc", "ba_threshold"]].melt("fold", var_name="metric", value_name="value")
-    data["percent"] = pct(data["value"])
-    data["metric"] = data["metric"].map({"auc_roc": "AUC", "ba_threshold": "BA@thr"})
-    fig, ax = plt.subplots(figsize=(8, 5))
-    sns.lineplot(data=data, x="fold", y="percent", hue="metric", marker="o", linewidth=2.5, ax=ax, palette=[COLORS["blue"], COLORS["green"]])
-    ax.set_ylim(25, 78)
-    ax.set_title("Real-life Cross-Domain Variance by Fold")
-    ax.set_xlabel("")
-    ax.set_ylabel("Score (%)")
-    save(fig, out_dir, "graph10_reallife_per_fold_variance", dpi)
 
 
 def load_dolos_final_predictions() -> pd.DataFrame:
@@ -688,72 +671,6 @@ def graph_dolos_score_by_host(out_dir: Path, dpi: int) -> None:
     save(fig, out_dir, "graph17_dolos_score_by_host", dpi)
 
 
-def load_reallife_prediction(name: str, scope: str = "all_121") -> pd.DataFrame:
-    path = REAL_LIFE_REPORT_DIR / f"{scope}_{name}_predictions.csv"
-    df = pd.read_csv(path)
-    df["label_name"] = df["label"].astype(int).map({0: "Truth", 1: "Lie"})
-    return df
-
-
-def graph_reallife_score_distribution(out_dir: Path, dpi: int) -> None:
-    df = load_reallife_prediction("gated_prior_kl_3fold_score_mean")
-    fig, ax = plt.subplots(figsize=(10, 5))
-    sns.histplot(
-        data=df,
-        x="score_lie",
-        hue="label_name",
-        bins=24,
-        stat="density",
-        common_norm=False,
-        element="step",
-        fill=True,
-        alpha=0.28,
-        palette={"Truth": COLORS["blue"], "Lie": COLORS["orange"]},
-        ax=ax,
-    )
-    ax.axvline(0.5, color=COLORS["gray"], linestyle="--", linewidth=1.2)
-    ax.set_title("Real-life Score Distribution: Gated Prior-KL 3-Fold Mean")
-    ax.set_xlabel("Predicted P(lie)")
-    ax.set_ylabel("Density")
-    save(fig, out_dir, "graph18_reallife_score_distribution", dpi)
-
-
-def graph_reallife_roc_curve(out_dir: Path, dpi: int) -> None:
-    methods = {
-        "Cross-attention 3-fold mean": load_reallife_prediction("cross_attention_auc_3fold_score_mean"),
-        "Gated prior-KL 3-fold mean": load_reallife_prediction("gated_prior_kl_3fold_score_mean"),
-    }
-    fig, ax = plt.subplots(figsize=(7, 6))
-    for i, (label, df) in enumerate(methods.items()):
-        y = df["label"].astype(int).to_numpy()
-        s = df["score_lie"].astype(float).to_numpy()
-        fpr, tpr, _ = roc_curve(y, s)
-        color = [COLORS["blue"], COLORS["orange"]][i]
-        ax.plot(fpr, tpr, linewidth=2.4, color=color, label=f"{label} AUC={roc_auc_score(y, s) * 100:.2f}")
-    ax.plot([0, 1], [0, 1], color=COLORS["gray"], linestyle="--", linewidth=1)
-    ax.set_title("Real-life ROC Curves (all_121)")
-    ax.set_xlabel("False positive rate")
-    ax.set_ylabel("True positive rate")
-    ax.legend(loc="lower right")
-    save(fig, out_dir, "graph19_reallife_roc_curve", dpi)
-
-
-def graph_reallife_confusion_matrix_best(out_dir: Path, dpi: int) -> None:
-    scopes = ["all_121", "official_test_12"]
-    fig, axes = plt.subplots(1, 2, figsize=(9, 4))
-    for ax, scope in zip(axes, scopes, strict=True):
-        df = load_reallife_prediction("gated_prior_kl_3fold_score_mean", scope=scope)
-        y = df["label"].astype(int).to_numpy()
-        pred = (df["score_lie"].astype(float).to_numpy() >= 0.5).astype(int)
-        cm = confusion_matrix(y, pred, labels=[0, 1])
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Greens", cbar=False, ax=ax, xticklabels=["Truth", "Lie"], yticklabels=["Truth", "Lie"])
-        ax.set_title(scope)
-        ax.set_xlabel("Predicted")
-        ax.set_ylabel("Actual")
-    fig.suptitle("Real-life Clean Best Score-Mean Confusion Matrices", y=1.02, fontsize=14, weight="bold")
-    save(fig, out_dir, "graph20_reallife_confusion_matrix_best", dpi)
-
-
 def write_index(out_dir: Path) -> None:
     lines = ["# Generated Report Figures", ""]
     for name, title in FIGURE_SPECS:
@@ -778,7 +695,7 @@ def main() -> None:
     cross_attention_block(out_dir, dpi)
     gated_logit_fusion(out_dir, dpi)
     prediction_level_ensemble(out_dir, dpi)
-    cross_domain_protocol(out_dir, dpi)
+    dolos_protocol(out_dir, dpi)
 
     graph_label_distribution(out_dir, dpi)
     graph_dolos_method_comparison(out_dir, dpi)
@@ -788,8 +705,6 @@ def main() -> None:
     graph_error_by_host(out_dir, dpi)
     graph_episode_heatmap(out_dir, dpi)
     graph_confusion_matrices(out_dir, dpi)
-    graph_reallife_method_comparison(out_dir, dpi)
-    graph_reallife_per_fold(out_dir, dpi)
     graph_dolos_score_distribution(out_dir, dpi)
     graph_dolos_roc_curve(out_dir, dpi)
     graph_dolos_pr_curve(out_dir, dpi)
@@ -797,9 +712,6 @@ def main() -> None:
     graph_dolos_error_type_counts(out_dir, dpi)
     graph_contamination_metric_comparison(out_dir, dpi)
     graph_dolos_score_by_host(out_dir, dpi)
-    graph_reallife_score_distribution(out_dir, dpi)
-    graph_reallife_roc_curve(out_dir, dpi)
-    graph_reallife_confusion_matrix_best(out_dir, dpi)
     write_index(out_dir)
 
     print(f"Wrote {len(FIGURE_SPECS)} figures to {out_dir}")

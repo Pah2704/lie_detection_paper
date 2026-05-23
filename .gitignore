@@ -7,9 +7,11 @@ ai_env/
 
 # Dataset files are not committed.
 data/*.zip
+data/DOLOS/
 data/raw/
-data/processed/faces/
-data/processed/flow/
+data/processed/audio/
+data/processed/faces_224_clean/
+data/processed/optflow_clean/
 
 # Keep split CSV/JSON, ignore generated media/checkpoints.
 *.mp4
@@ -23,6 +25,7 @@ data/processed/flow/
 outputs/archive/
 outputs/checkpoints/
 outputs/figures/
+outputs/logs/
 *.pt
 *.pth
 *.ckpt

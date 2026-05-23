@@ -1,0 +1,5 @@
+clip_suspect_contamination,clip_any_n,clip_any_default_error_rate,clip_any_calibrated_error_rate,clip_any_mean_score_lie,first_window_suspect,clip_first_n,clip_first_default_error_rate,clip_first_calibrated_error_rate,clip_first_mean_score_lie
+False,180.0,0.35555555555555557,0.4,0.49680617332754157,,,,,
+True,1250.0,0.4192,0.4312,0.4948609595769145,,,,,
+,,,,,False,434.0,0.4032258064516129,0.43548387096774194,0.4973901526352688
+,,,,,True,996.0,0.4146586345381526,0.42369477911646586,0.49411042613091766

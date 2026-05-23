@@ -1,0 +1,245 @@
+[
+  {
+    "run": "full_auc",
+    "stream": "all",
+    "best_epoch": 1,
+    "best_val_auc_roc": 0.5347633136094675,
+    "best_val_balanced_accuracy": 0.5448717948717948,
+    "best_val_f1_lie": 0.32,
+    "test_auc_roc": 0.5793495480383934,
+    "test_auc_pr": 0.5889112470344231,
+    "test_accuracy": 0.4892241379310345,
+    "test_balanced_accuracy": 0.5117230453825365,
+    "test_f1_lie": 0.18556701030927836,
+    "test_macro_f1": 0.4067552476978103,
+    "test_cm": [
+      [
+        200,
+        19
+      ],
+      [
+        218,
+        27
+      ]
+    ],
+    "calibrated_threshold": 0.48952546148073106,
+    "calibrated_accuracy": 0.5107758620689655,
+    "calibrated_balanced_accuracy": 0.5258317025440313,
+    "calibrated_f1_lie": 0.35694050991501414,
+    "calibrated_macro_f1": 0.481078950609681,
+    "calibrated_cm": [
+      [
+        174,
+        45
+      ],
+      [
+        182,
+        63
+      ]
+    ],
+    "score_mean": 0.481344091889594,
+    "score_std": 0.012950458852689323,
+    "score_min": 0.4583062827587127,
+    "score_max": 0.5211613972981771
+  },
+  {
+    "run": "fusion_residual",
+    "stream": "all_residual",
+    "best_epoch": 1,
+    "best_val_auc_roc": 0.5433925049309665,
+    "best_val_balanced_accuracy": 0.5,
+    "best_val_f1_lie": 0.0,
+    "test_auc_roc": 0.555847544497251,
+    "test_auc_pr": 0.5679031048036643,
+    "test_accuracy": 0.47198275862068967,
+    "test_balanced_accuracy": 0.5,
+    "test_f1_lie": 0.0,
+    "test_macro_f1": 0.3206442166910688,
+    "test_cm": [
+      [
+        219,
+        0
+      ],
+      [
+        245,
+        0
+      ]
+    ],
+    "calibrated_threshold": 0.4819139838218689,
+    "calibrated_accuracy": 0.4870689655172414,
+    "calibrated_balanced_accuracy": 0.5087130742708041,
+    "calibrated_f1_lie": 0.20134228187919462,
+    "calibrated_macro_f1": 0.4117822520507084,
+    "calibrated_cm": [
+      [
+        196,
+        23
+      ],
+      [
+        215,
+        30
+      ]
+    ],
+    "score_mean": 0.46720902922733976,
+    "score_std": 0.011610852610438455,
+    "score_min": 0.4426305651664733,
+    "score_max": 0.491255834698677,
+    "feature_spatial_abs_mean": 0.4405724108219147,
+    "feature_spatial_rms": 0.7027403116226196,
+    "feature_flow_abs_mean": 0.4443783462047577,
+    "feature_flow_rms": 0.6620270013809204,
+    "feature_audio_abs_mean": 0.4158180058002472,
+    "feature_audio_rms": 0.7332785725593567,
+    "feature_visual_abs_mean": 0.4490424692630768,
+    "feature_visual_rms": 0.7655235528945923,
+    "feature_attention_delta_abs_mean": 0.9104461073875428,
+    "feature_attention_delta_rms": 1.1740802526474,
+    "feature_attended_abs_mean": 0.7856664657592773,
+    "feature_attended_rms": 1.0056201219558716,
+    "feature_fused_abs_mean": 0.3964631557464599,
+    "feature_fused_rms": 0.6841075420379639,
+    "feature_logits_abs_mean": 0.0696067810058593,
+    "feature_logits_rms": 0.0744244158267974
+  },
+  {
+    "run": "spatial_only",
+    "stream": "spatial",
+    "best_epoch": 2,
+    "best_val_auc_roc": 0.5840729783037475,
+    "best_val_balanced_accuracy": 0.548076923076923,
+    "best_val_f1_lie": 0.6785714285714286,
+    "test_auc_roc": 0.5580095051719318,
+    "test_auc_pr": 0.6070762056863372,
+    "test_accuracy": 0.5237068965517241,
+    "test_balanced_accuracy": 0.5145745969620725,
+    "test_f1_lie": 0.6003616636528029,
+    "test_macro_f1": 0.5055141651597348,
+    "test_cm": [
+      [
+        77,
+        142
+      ],
+      [
+        79,
+        166
+      ]
+    ],
+    "calibrated_threshold": 0.529942087829113,
+    "calibrated_accuracy": 0.521551724137931,
+    "calibrated_balanced_accuracy": 0.5406392694063927,
+    "calibrated_f1_lie": 0.30625,
+    "calibrated_macro_f1": 0.4705592105263158,
+    "calibrated_cm": [
+      [
+        193,
+        26
+      ],
+      [
+        196,
+        49
+      ]
+    ],
+    "score_mean": 0.5096219718402373,
+    "score_std": 0.01860935896268579,
+    "score_min": 0.45992012321949,
+    "score_max": 0.547845147550106,
+    "feature_logits_abs_mean": 0.041168212890625,
+    "feature_logits_rms": 0.0482000783085823,
+    "feature_spatial_abs_mean": 0.4340616464614868,
+    "feature_spatial_rms": 0.7455562353134155
+  },
+  {
+    "run": "flow_only",
+    "stream": "flow",
+    "best_epoch": 2,
+    "best_val_auc_roc": 0.5633629191321499,
+    "best_val_balanced_accuracy": 0.5,
+    "best_val_f1_lie": 0.75,
+    "test_auc_roc": 0.5701332587829652,
+    "test_auc_pr": 0.5845714122364055,
+    "test_accuracy": 0.5280172413793104,
+    "test_balanced_accuracy": 0.5,
+    "test_f1_lie": 0.691114245416079,
+    "test_macro_f1": 0.3455571227080395,
+    "test_cm": [
+      [
+        0,
+        219
+      ],
+      [
+        0,
+        245
+      ]
+    ],
+    "calibrated_threshold": 0.5199344998056239,
+    "calibrated_accuracy": 0.5517241379310345,
+    "calibrated_balanced_accuracy": 0.5420743639921722,
+    "calibrated_f1_lie": 0.6272401433691757,
+    "calibrated_macro_f1": 0.5325389906035067,
+    "calibrated_cm": [
+      [
+        81,
+        138
+      ],
+      [
+        70,
+        175
+      ]
+    ],
+    "score_mean": 0.5206885725067975,
+    "score_std": 0.0016887421349626956,
+    "score_min": 0.5161833034621345,
+    "score_max": 0.5265607833862305,
+    "feature_flow_abs_mean": 0.4742102324962616,
+    "feature_flow_rms": 0.7556065320968628,
+    "feature_logits_abs_mean": 0.0388145446777343,
+    "feature_logits_rms": 0.0392164438962936
+  },
+  {
+    "run": "audio_only",
+    "stream": "audio",
+    "best_epoch": 28,
+    "best_val_auc_roc": 0.6977317554240631,
+    "best_val_balanced_accuracy": 0.5,
+    "best_val_f1_lie": 0.75,
+    "test_auc_roc": 0.5666387102786321,
+    "test_auc_pr": 0.5672275700020236,
+    "test_accuracy": 0.5280172413793104,
+    "test_balanced_accuracy": 0.5,
+    "test_f1_lie": 0.691114245416079,
+    "test_macro_f1": 0.3455571227080395,
+    "test_cm": [
+      [
+        0,
+        219
+      ],
+      [
+        0,
+        245
+      ]
+    ],
+    "calibrated_threshold": 0.5379821926355361,
+    "calibrated_accuracy": 0.5301724137931034,
+    "calibrated_balanced_accuracy": 0.5391109868604976,
+    "calibrated_f1_lie": 0.4603960396039604,
+    "calibrated_macro_f1": 0.5221827526264077,
+    "calibrated_cm": [
+      [
+        153,
+        66
+      ],
+      [
+        152,
+        93
+      ]
+    ],
+    "score_mean": 0.5339697915642873,
+    "score_std": 0.012685557316457634,
+    "score_min": 0.5062639514605204,
+    "score_max": 0.5888753732045492,
+    "feature_audio_abs_mean": 0.3694802522659302,
+    "feature_audio_rms": 0.62730473279953,
+    "feature_logits_abs_mean": 0.0370121002197265,
+    "feature_logits_rms": 0.0406538471579551
+  }
+]

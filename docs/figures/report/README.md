@@ -11,7 +11,7 @@
 - `fig09_cross_attention_block.png` / `fig09_cross_attention_block.svg`: Cross-attention block
 - `fig10_gated_logit_fusion.png` / `fig10_gated_logit_fusion.svg`: Gated logit fusion
 - `fig11_prediction_level_ensemble.png` / `fig11_prediction_level_ensemble.svg`: Prediction-level ensemble
-- `fig12_cross_domain_protocol.png` / `fig12_cross_domain_protocol.svg`: Optional appendix: cross-domain protocol
+- `fig12_dolos_protocol.png` / `fig12_dolos_protocol.svg`: DOLOS-only evaluation protocol
 - `graph01_dolos_label_distribution.png` / `graph01_dolos_label_distribution.svg`: DOLOS label distribution
 - `graph02_dolos_method_comparison.png` / `graph02_dolos_method_comparison.svg`: DOLOS method comparison
 - `graph03_dolos_per_fold_auc_ba.png` / `graph03_dolos_per_fold_auc_ba.svg`: DOLOS per-fold AUC/BA
@@ -20,8 +20,6 @@
 - `graph06_error_by_host.png` / `graph06_error_by_host.svg`: Error by host
 - `graph07_episode_error_heatmap.png` / `graph07_episode_error_heatmap.svg`: Worst episode BA heatmap
 - `graph08_confusion_matrices.png` / `graph08_confusion_matrices.svg`: Final ensemble confusion matrices
-- `graph09_reallife_method_comparison.png` / `graph09_reallife_method_comparison.svg`: Optional appendix: Real-life method comparison
-- `graph10_reallife_per_fold_variance.png` / `graph10_reallife_per_fold_variance.svg`: Optional appendix: Real-life per-fold variance
 - `graph11_dolos_score_distribution.png` / `graph11_dolos_score_distribution.svg`: DOLOS final score distribution
 - `graph12_dolos_roc_curve.png` / `graph12_dolos_roc_curve.svg`: DOLOS final ROC curves
 - `graph13_dolos_pr_curve.png` / `graph13_dolos_pr_curve.svg`: DOLOS final precision-recall curve
@@ -29,6 +27,3 @@
 - `graph15_dolos_error_type_counts.png` / `graph15_dolos_error_type_counts.svg`: DOLOS error type counts
 - `graph16_contamination_metric_comparison.png` / `graph16_contamination_metric_comparison.svg`: Contamination metric comparison
 - `graph17_dolos_score_by_host.png` / `graph17_dolos_score_by_host.svg`: DOLOS score by host
-- `graph18_reallife_score_distribution.png` / `graph18_reallife_score_distribution.svg`: Optional appendix: Real-life score distribution
-- `graph19_reallife_roc_curve.png` / `graph19_reallife_roc_curve.svg`: Optional appendix: Real-life ROC curves
-- `graph20_reallife_confusion_matrix_best.png` / `graph20_reallife_confusion_matrix_best.svg`: Optional appendix: Real-life best confusion matrices
