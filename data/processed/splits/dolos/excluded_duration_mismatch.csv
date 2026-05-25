@@ -1,0 +1,16 @@
+video_id,video_path,start_time,end_time,start_seconds,end_seconds,raw_duration_seconds,expected_duration_seconds,too_long,too_short
+AN_WILTY_EP17_truth2,data/raw/dolos/videos/AN_WILTY_EP17_truth2.mp4,8,8:04,480,484,476.2,4,True,False
+AN_WILTY_EP22_truth1,data/raw/dolos/videos/AN_WILTY_EP22_truth1.mp4,2,2:05,120,125,123.24,5,True,False
+AN_WILTY_EP23_truth9,data/raw/dolos/videos/AN_WILTY_EP23_truth9.mp4,6,6:08,360,368,362.04,8,True,False
+AN_WILTY_EP26_lie14,data/raw/dolos/videos/AN_WILTY_EP26_lie14.mp4,12,12:05,720,725,713.04,5,True,False
+BRI_WILTY_EP59_deception_24,data/raw/dolos/videos/BRI_WILTY_EP59_deception_24.mp4,22,22:06,1320,1326,1304.04,6,True,False
+BRI_WILTY_EP61_lie_6,data/raw/dolos/videos/BRI_WILTY_EP61_lie_6.mp4,3,3:04,180,184,181.04,4,True,False
+LS_WILTY_EP11_lie4,data/raw/dolos/videos/LS_WILTY_EP11_lie4.mp4,8,8:04,480,484,476.2,4,True,False
+LS_WILTY_EP12_lie9,data/raw/dolos/videos/LS_WILTY_EP12_lie9.mp4,16,16:04,960,964,948.04,4,True,False
+LS_WILTY_EP3_truth5,data/raw/dolos/videos/LS_WILTY_EP3_truth5.mp4,5,5:05,300,305,300.24,5,True,False
+LS_WILTY_EP4_truth7,data/raw/dolos/videos/LS_WILTY_EP4_truth7.mp4,21,21:03,1260,1263,1242.16,3,True,False
+LS_WILTY_EP9_lie7,data/raw/dolos/videos/LS_WILTY_EP9_lie7.mp4,6,6:04,360,364,358.04,4,True,False
+YW_WILTY_EP47_lie4,data/raw/dolos/videos/YW_WILTY_EP47_lie4.mp4,10,10:09,600,609,599.041992,9,True,False
+YW_WILTY_EP52_truth6,data/raw/dolos/videos/YW_WILTY_EP52_truth6.mp4,7,7:08,420,428,421.12,8,True,False
+YW_WILTY_EP54_lie1,data/raw/dolos/videos/YW_WILTY_EP54_lie1.mp4,11,11:06,660,666,655.12,6,True,False
+YW_WILTY_EP54_truth5,data/raw/dolos/videos/YW_WILTY_EP54_truth5.mp4,15,15:05,900,905,890.08,5,True,False

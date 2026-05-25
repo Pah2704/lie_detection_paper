@@ -1,0 +1,10 @@
+candidate,models,grid_step,mean_test_auc,mean_test_calibrated_ba,mean_test_f1_lie,mean_test_macro_f1,mean_weights,decision
+cross_attention_auc,cross_attention_auc,,0.6138670969,0.5635006105,0.4830161177,0.5426158171,cross_attention_auc=1.00,baseline_only
+gated_prior_kl,gated_prior_kl,,0.6394114061,0.5918096385,0.5552759640,0.5813566264,gated_prior_kl=1.00,strongest_single_model
+spatial_only,spatial_only,,0.6312361541,0.5876075188,0.4819467507,0.5579591924,spatial_only=1.00,useful_single_stream_but_not_final
+audio_only,audio_only,,0.5803266688,0.5603615762,0.5309175197,0.5522182179,audio_only=1.00,not_final
+ensemble_2model_raw_auc,cross_attention_auc+gated_prior_kl,0.01,0.6505471759,0.6016673072,0.5495284903,0.5890511380,cross_attention_auc=0.61;gated_prior_kl=0.39,final_candidate
+ensemble_2model_raw_ba,cross_attention_auc+gated_prior_kl,0.01,0.6486536905,0.6008272507,0.5861920285,0.5891293290,cross_attention_auc=0.76;gated_prior_kl=0.24,secondary_if_prioritizing_f1
+ensemble_audio_full_raw_ba,cross_attention_auc+gated_prior_kl+audio_only,0.01,0.6273139009,0.5785786735,0.5260966789,0.5668760159,cross_attention_auc=0.28;gated_prior_kl=0.04;audio_only=0.68,rejected_val_overweights_audio
+ensemble_spatial_subset_logit_auc,cross_attention_auc+gated_prior_kl+spatial_only,0.01,0.6431919987,0.5852631200,0.4539963000,0.5486773895,cross_attention_auc=0.60;gated_prior_kl=0.15;spatial_only=0.25,rejected_below_2model
+ensemble_full4_raw_ba,cross_attention_auc+gated_prior_kl+audio_only+spatial_only,0.02,0.6284681644,0.5798704463,0.5288558928,0.5685327483,cross_attention_auc=0.18;gated_prior_kl=0.04;audio_only=0.75;spatial_only=0.03,rejected_val_overweights_audio

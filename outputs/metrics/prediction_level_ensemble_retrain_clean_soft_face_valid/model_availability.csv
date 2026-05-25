@@ -1,0 +1,3 @@
+model,metrics_dir,available_folds,num_available_folds,selected
+cross_attention_auc,outputs/metrics/retrain_clean_dolos_three_stream_auc,"fold1,fold2,fold3",3,True
+gated_prior_kl,outputs/metrics/retrain_clean_dolos_three_stream_gated_logits_prior_kl_soft_face_valid,"fold1,fold2,fold3",3,True

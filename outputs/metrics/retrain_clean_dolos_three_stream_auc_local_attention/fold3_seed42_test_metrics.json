@@ -1,0 +1,103 @@
+{
+  "accuracy": 0.47198275862068967,
+  "balanced_accuracy": 0.5,
+  "precision_lie": 0.0,
+  "recall_lie": 0.0,
+  "f1_lie": 0.0,
+  "macro_f1": 0.3206442166910688,
+  "confusion_matrix": [
+    [
+      219,
+      0
+    ],
+    [
+      245,
+      0
+    ]
+  ],
+  "threshold": 0.5,
+  "auc_roc": 0.5560339204174821,
+  "auc_pr": 0.5693905372978163,
+  "bootstrap_95ci": {
+    "accuracy": {
+      "low": 0.42451508620689654,
+      "high": 0.5193965517241379
+    },
+    "f1_lie": {
+      "low": 0.0,
+      "high": 0.0
+    },
+    "auc_roc": {
+      "low": 0.504466665904493,
+      "high": 0.6063070464982823
+    }
+  },
+  "calibrated_threshold_metrics": {
+    "accuracy": 0.5,
+    "balanced_accuracy": 0.5163544870002795,
+    "precision_lie": 0.5670103092783505,
+    "recall_lie": 0.22448979591836735,
+    "f1_lie": 0.3216374269005848,
+    "macro_f1": 0.46286649502025823,
+    "confusion_matrix": [
+      [
+        177,
+        42
+      ],
+      [
+        190,
+        55
+      ]
+    ],
+    "threshold": 0.47912289632691274,
+    "auc_roc": 0.5560339204174821,
+    "auc_pr": 0.5693905372978163
+  },
+  "threshold_calibration": {
+    "threshold": 0.47912289632691274,
+    "metric": "balanced_accuracy",
+    "metric_value": 0.5801282051282051
+  },
+  "val_metrics_default_threshold": {
+    "accuracy": 0.4,
+    "balanced_accuracy": 0.5,
+    "precision_lie": 0.0,
+    "recall_lie": 0.0,
+    "f1_lie": 0.0,
+    "macro_f1": 0.2857142857142857,
+    "confusion_matrix": [
+      [
+        52,
+        0
+      ],
+      [
+        78,
+        0
+      ]
+    ],
+    "threshold": 0.5,
+    "auc_roc": 0.5237919132149902,
+    "auc_pr": 0.6363569541077327
+  },
+  "val_metrics_calibrated_threshold": {
+    "accuracy": 0.5384615384615384,
+    "balanced_accuracy": 0.5801282051282051,
+    "precision_lie": 0.725,
+    "recall_lie": 0.3717948717948718,
+    "f1_lie": 0.4915254237288136,
+    "macro_f1": 0.534495106230604,
+    "confusion_matrix": [
+      [
+        41,
+        11
+      ],
+      [
+        49,
+        29
+      ]
+    ],
+    "threshold": 0.47912289632691274,
+    "auc_roc": 0.5237919132149902,
+    "auc_pr": 0.6363569541077327
+  }
+}

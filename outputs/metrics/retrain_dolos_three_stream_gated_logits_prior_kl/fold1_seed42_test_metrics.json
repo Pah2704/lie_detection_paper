@@ -1,0 +1,103 @@
+{
+  "accuracy": 0.4669421487603306,
+  "balanced_accuracy": 0.4977973568281938,
+  "precision_lie": 0.0,
+  "recall_lie": 0.0,
+  "f1_lie": 0.0,
+  "macro_f1": 0.3183098591549296,
+  "confusion_matrix": [
+    [
+      226,
+      1
+    ],
+    [
+      257,
+      0
+    ]
+  ],
+  "threshold": 0.5,
+  "auc_roc": 0.5416788083443322,
+  "auc_pr": 0.5729332272488411,
+  "bootstrap_95ci": {
+    "accuracy": {
+      "low": 0.42355371900826444,
+      "high": 0.5144628099173554
+    },
+    "f1_lie": {
+      "low": 0.0,
+      "high": 0.0
+    },
+    "auc_roc": {
+      "low": 0.49076939152574467,
+      "high": 0.5922817973941444
+    }
+  },
+  "calibrated_threshold_metrics": {
+    "accuracy": 0.5371900826446281,
+    "balanced_accuracy": 0.531034128113269,
+    "precision_lie": 0.5567010309278351,
+    "recall_lie": 0.6303501945525292,
+    "f1_lie": 0.5912408759124088,
+    "macro_f1": 0.5289537712895378,
+    "confusion_matrix": [
+      [
+        98,
+        129
+      ],
+      [
+        95,
+        162
+      ]
+    ],
+    "threshold": 0.460394191245238,
+    "auc_roc": 0.5416788083443322,
+    "auc_pr": 0.5729332272488411
+  },
+  "threshold_calibration": {
+    "threshold": 0.460394191245238,
+    "metric": "balanced_accuracy",
+    "metric_value": 0.6485042735042735
+  },
+  "val_metrics_default_threshold": {
+    "accuracy": 0.3977272727272727,
+    "balanced_accuracy": 0.4861111111111111,
+    "precision_lie": 0.0,
+    "recall_lie": 0.0,
+    "f1_lie": 0.0,
+    "macro_f1": 0.2845528455284553,
+    "confusion_matrix": [
+      [
+        35,
+        1
+      ],
+      [
+        52,
+        0
+      ]
+    ],
+    "threshold": 0.5,
+    "auc_roc": 0.6362179487179487,
+    "auc_pr": 0.6758349753587538
+  },
+  "val_metrics_calibrated_threshold": {
+    "accuracy": 0.6704545454545454,
+    "balanced_accuracy": 0.6485042735042735,
+    "precision_lie": 0.7017543859649122,
+    "recall_lie": 0.7692307692307693,
+    "f1_lie": 0.7339449541284404,
+    "macro_f1": 0.6505545666164589,
+    "confusion_matrix": [
+      [
+        19,
+        17
+      ],
+      [
+        12,
+        40
+      ]
+    ],
+    "threshold": 0.460394191245238,
+    "auc_roc": 0.6362179487179487,
+    "auc_pr": 0.6758349753587538
+  }
+}

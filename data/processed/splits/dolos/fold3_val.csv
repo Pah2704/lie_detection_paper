@@ -1,0 +1,131 @@
+video_id,video_path,filename_label,host,episode,episode_group_id,size_bytes,is_corrupt,yt_video_id,file_name,start_time,end_time,label,group_id,split,fold
+AN_WILTY_EP21_lie1,data/raw/dolos/videos/AN_WILTY_EP21_lie1.mp4,1.0,AN,21,AN_EP21,309160.0,False,K9h744kQGTM,AN_WILTY_EP21_lie1,1:51,1:56,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie11,data/raw/dolos/videos/AN_WILTY_EP21_lie11.mp4,1.0,AN,21,AN_EP21,169834.0,False,K9h744kQGTM,AN_WILTY_EP21_lie11,17:44,17:48,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie12,data/raw/dolos/videos/AN_WILTY_EP21_lie12.mp4,1.0,AN,21,AN_EP21,279839.0,False,K9h744kQGTM,AN_WILTY_EP21_lie12,19:52,19:56,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie13,data/raw/dolos/videos/AN_WILTY_EP21_lie13.mp4,1.0,AN,21,AN_EP21,302256.0,False,K9h744kQGTM,AN_WILTY_EP21_lie13,21:47,21:52,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie14,data/raw/dolos/videos/AN_WILTY_EP21_lie14.mp4,1.0,AN,21,AN_EP21,447786.0,False,K9h744kQGTM,AN_WILTY_EP21_lie14,21:56,22:03,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie15,data/raw/dolos/videos/AN_WILTY_EP21_lie15.mp4,1.0,AN,21,AN_EP21,359912.0,False,K9h744kQGTM,AN_WILTY_EP21_lie15,22:12,22:17,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie16,data/raw/dolos/videos/AN_WILTY_EP21_lie16.mp4,1.0,AN,21,AN_EP21,367578.0,False,K9h744kQGTM,AN_WILTY_EP21_lie16,22:43,22:46,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie17,data/raw/dolos/videos/AN_WILTY_EP21_lie17.mp4,1.0,AN,21,AN_EP21,301294.0,False,K9h744kQGTM,AN_WILTY_EP21_lie17,23:01,23:06,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie5,data/raw/dolos/videos/AN_WILTY_EP21_lie5.mp4,1.0,AN,21,AN_EP21,342483.0,False,K9h744kQGTM,AN_WILTY_EP21_lie5,8:34,8:41,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie6,data/raw/dolos/videos/AN_WILTY_EP21_lie6.mp4,1.0,AN,21,AN_EP21,398291.0,False,K9h744kQGTM,AN_WILTY_EP21_lie6,8:51,8:58,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie7,data/raw/dolos/videos/AN_WILTY_EP21_lie7.mp4,1.0,AN,21,AN_EP21,178902.0,False,K9h744kQGTM,AN_WILTY_EP21_lie7,9:02,9:05,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_lie9,data/raw/dolos/videos/AN_WILTY_EP21_lie9.mp4,1.0,AN,21,AN_EP21,189641.0,False,K9h744kQGTM,AN_WILTY_EP21_lie9,17:19,17:22,1.0,AN_EP21,val,fold3
+AN_WILTY_EP21_truth19,data/raw/dolos/videos/AN_WILTY_EP21_truth19.mp4,0.0,AN,21,AN_EP21,184156.0,False,K9h744kQGTM,AN_WILTY_EP21_truth19,23:44,23:47,0.0,AN_EP21,val,fold3
+AN_WILTY_EP21_truth2,data/raw/dolos/videos/AN_WILTY_EP21_truth2.mp4,0.0,AN,21,AN_EP21,306894.0,False,K9h744kQGTM,AN_WILTY_EP21_truth2,5:44,5:49,0.0,AN_EP21,val,fold3
+AN_WILTY_EP21_truth21,data/raw/dolos/videos/AN_WILTY_EP21_truth21.mp4,0.0,AN,21,AN_EP21,161228.0,False,K9h744kQGTM,AN_WILTY_EP21_truth21,24:20,24:24,0.0,AN_EP21,val,fold3
+AN_WILTY_EP21_truth4,data/raw/dolos/videos/AN_WILTY_EP21_truth4.mp4,0.0,AN,21,AN_EP21,442749.0,False,K9h744kQGTM,AN_WILTY_EP21_truth4,7:04,7:10,0.0,AN_EP21,val,fold3
+AN_WILTY_EP22_lie10,data/raw/dolos/videos/AN_WILTY_EP22_lie10.mp4,1.0,AN,22,AN_EP22,465009.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie10,8:32,8:37,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie12,data/raw/dolos/videos/AN_WILTY_EP22_lie12.mp4,1.0,AN,22,AN_EP22,274345.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie12,9:29,9:33,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie16,data/raw/dolos/videos/AN_WILTY_EP22_lie16.mp4,1.0,AN,22,AN_EP22,290441.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie16,18:08,18:11,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie21,data/raw/dolos/videos/AN_WILTY_EP22_lie21.mp4,1.0,AN,22,AN_EP22,207797.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie21,19:50,19:53,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie22,data/raw/dolos/videos/AN_WILTY_EP22_lie22.mp4,1.0,AN,22,AN_EP22,151986.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie22,19:57,20,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie24,data/raw/dolos/videos/AN_WILTY_EP22_lie24.mp4,1.0,AN,22,AN_EP22,396409.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie24,20:22,20:26,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie25,data/raw/dolos/videos/AN_WILTY_EP22_lie25.mp4,1.0,AN,22,AN_EP22,269949.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie25,21:22,21:25,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie27,data/raw/dolos/videos/AN_WILTY_EP22_lie27.mp4,1.0,AN,22,AN_EP22,426148.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie27,23:33,23:38,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie28,data/raw/dolos/videos/AN_WILTY_EP22_lie28.mp4,1.0,AN,22,AN_EP22,553092.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie28,24:06,24:14,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie29,data/raw/dolos/videos/AN_WILTY_EP22_lie29.mp4,1.0,AN,22,AN_EP22,365796.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie29,24:20,24:27,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie30,data/raw/dolos/videos/AN_WILTY_EP22_lie30.mp4,1.0,AN,22,AN_EP22,366619.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie30,26:11,26:15,0.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie5,data/raw/dolos/videos/AN_WILTY_EP22_lie5.mp4,1.0,AN,22,AN_EP22,318335.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie5,4:43,4:46,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie7,data/raw/dolos/videos/AN_WILTY_EP22_lie7.mp4,1.0,AN,22,AN_EP22,530835.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie7,5:31,5:34,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie8,data/raw/dolos/videos/AN_WILTY_EP22_lie8.mp4,1.0,AN,22,AN_EP22,528647.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie8,7:29,7:36,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_lie9,data/raw/dolos/videos/AN_WILTY_EP22_lie9.mp4,1.0,AN,22,AN_EP22,469194.0,False,4guAsXvaYfE,AN_WILTY_EP22_lie9,8:10,8:13,1.0,AN_EP22,val,fold3
+AN_WILTY_EP22_truth13,data/raw/dolos/videos/AN_WILTY_EP22_truth13.mp4,0.0,AN,22,AN_EP22,373137.0,False,4guAsXvaYfE,AN_WILTY_EP22_truth13,10:46,10:52,0.0,AN_EP22,val,fold3
+AN_WILTY_EP22_truth14,data/raw/dolos/videos/AN_WILTY_EP22_truth14.mp4,0.0,AN,22,AN_EP22,401425.0,False,4guAsXvaYfE,AN_WILTY_EP22_truth14,11:31,11:38,0.0,AN_EP22,val,fold3
+AN_WILTY_EP22_truth15,data/raw/dolos/videos/AN_WILTY_EP22_truth15.mp4,0.0,AN,22,AN_EP22,486890.0,False,4guAsXvaYfE,AN_WILTY_EP22_truth15,12:08,12:15,0.0,AN_EP22,val,fold3
+AN_WILTY_EP22_truth18,data/raw/dolos/videos/AN_WILTY_EP22_truth18.mp4,0.0,AN,22,AN_EP22,379767.0,False,4guAsXvaYfE,AN_WILTY_EP22_truth18,18:26,18:30,0.0,AN_EP22,val,fold3
+AN_WILTY_EP22_truth20,data/raw/dolos/videos/AN_WILTY_EP22_truth20.mp4,0.0,AN,22,AN_EP22,307872.0,False,4guAsXvaYfE,AN_WILTY_EP22_truth20,19:35,19:39,0.0,AN_EP22,val,fold3
+AN_WILTY_EP22_truth4,data/raw/dolos/videos/AN_WILTY_EP22_truth4.mp4,0.0,AN,22,AN_EP22,252729.0,False,4guAsXvaYfE,AN_WILTY_EP22_truth4,3:02,3:05,0.0,AN_EP22,val,fold3
+LS_WILTY_EP2_lie11,data/raw/dolos/videos/LS_WILTY_EP2_lie11.mp4,1.0,LS,2,LS_EP2,393143.0,False,ql3yoGIBlOw,LS_WILTY_EP2_lie11,26:40,26:45,1.0,LS_EP2,val,fold3
+LS_WILTY_EP2_lie2,data/raw/dolos/videos/LS_WILTY_EP2_lie2.mp4,1.0,LS,2,LS_EP2,381089.0,False,ql3yoGIBlOw,LS_WILTY_EP2_lie2,6:47,6:51,1.0,LS_EP2,val,fold3
+LS_WILTY_EP2_lie5,data/raw/dolos/videos/LS_WILTY_EP2_lie5.mp4,1.0,LS,2,LS_EP2,221171.0,False,ql3yoGIBlOw,LS_WILTY_EP2_lie5,15:24,15:28,1.0,LS_EP2,val,fold3
+LS_WILTY_EP2_lie6,data/raw/dolos/videos/LS_WILTY_EP2_lie6.mp4,1.0,LS,2,LS_EP2,703486.0,False,ql3yoGIBlOw,LS_WILTY_EP2_lie6,16:25,16:33,1.0,LS_EP2,val,fold3
+LS_WILTY_EP2_truth1,data/raw/dolos/videos/LS_WILTY_EP2_truth1.mp4,0.0,LS,2,LS_EP2,394550.0,False,ql3yoGIBlOw,LS_WILTY_EP2_truth1,2:03,2:08,0.0,LS_EP2,val,fold3
+LS_WILTY_EP2_truth5,data/raw/dolos/videos/LS_WILTY_EP2_truth5.mp4,0.0,LS,2,LS_EP2,408274.0,False,ql3yoGIBlOw,LS_WILTY_EP2_truth5,23:38,23:43,0.0,LS_EP2,val,fold3
+LS_WILTY_EP2_truth6,data/raw/dolos/videos/LS_WILTY_EP2_truth6.mp4,0.0,LS,2,LS_EP2,400222.0,False,ql3yoGIBlOw,LS_WILTY_EP2_truth6,23:56,24:00,0.0,LS_EP2,val,fold3
+LS_WILTY_EP73_ lie1,data/raw/dolos/videos/LS_WILTY_EP73_ lie1.mp4,1.0,LS,73,LS_EP73,488854.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie1,12:06,12:13,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie2,data/raw/dolos/videos/LS_WILTY_EP73_ lie2.mp4,1.0,LS,73,LS_EP73,422335.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie2,15:13,15:20,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie3,data/raw/dolos/videos/LS_WILTY_EP73_ lie3.mp4,1.0,LS,73,LS_EP73,379951.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie3,15:45,15:52,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie4,data/raw/dolos/videos/LS_WILTY_EP73_ lie4.mp4,1.0,LS,73,LS_EP73,324121.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie4,16:36,16:41,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie5,data/raw/dolos/videos/LS_WILTY_EP73_ lie5.mp4,1.0,LS,73,LS_EP73,211455.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie5,16:54,16:58,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie6,data/raw/dolos/videos/LS_WILTY_EP73_ lie6.mp4,1.0,LS,73,LS_EP73,218043.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie6,17:09,17:13,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie7,data/raw/dolos/videos/LS_WILTY_EP73_ lie7.mp4,1.0,LS,73,LS_EP73,428015.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie7,18:36,18:44,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ lie8,data/raw/dolos/videos/LS_WILTY_EP73_ lie8.mp4,1.0,LS,73,LS_EP73,651544.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ lie8,19:15,19:25,1.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true1,data/raw/dolos/videos/LS_WILTY_EP73_ true1.mp4,,LS,73,LS_EP73,549666.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true1,1:51,2:02,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true10,data/raw/dolos/videos/LS_WILTY_EP73_ true10.mp4,,LS,73,LS_EP73,382549.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true10,8:49,8:54,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true11,data/raw/dolos/videos/LS_WILTY_EP73_ true11.mp4,,LS,73,LS_EP73,390268.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true11,8:57,9:01,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true13,data/raw/dolos/videos/LS_WILTY_EP73_ true13.mp4,,LS,73,LS_EP73,443072.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true13,9:51,9:57,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true14,data/raw/dolos/videos/LS_WILTY_EP73_ true14.mp4,,LS,73,LS_EP73,311275.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true14,11:38,11:45,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true16,data/raw/dolos/videos/LS_WILTY_EP73_ true16.mp4,,LS,73,LS_EP73,285603.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true16,12:20,12:24,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true17,data/raw/dolos/videos/LS_WILTY_EP73_ true17.mp4,,LS,73,LS_EP73,522235.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true17,13:08,13:16,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true18,data/raw/dolos/videos/LS_WILTY_EP73_ true18.mp4,,LS,73,LS_EP73,272152.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true18,13:42,13:46,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true3,data/raw/dolos/videos/LS_WILTY_EP73_ true3.mp4,,LS,73,LS_EP73,208402.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true3,3:47,3:51,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true4,data/raw/dolos/videos/LS_WILTY_EP73_ true4.mp4,,LS,73,LS_EP73,377409.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true4,3:55,4:01,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true5,data/raw/dolos/videos/LS_WILTY_EP73_ true5.mp4,,LS,73,LS_EP73,1121100.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true5,4:02,4:25,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true7,data/raw/dolos/videos/LS_WILTY_EP73_ true7.mp4,,LS,73,LS_EP73,379472.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true7,6:11,6:16,0.0,LS_EP73,val,fold3
+LS_WILTY_EP73_ true8,data/raw/dolos/videos/LS_WILTY_EP73_ true8.mp4,,LS,73,LS_EP73,601733.0,False,CHT1ESSpKQU,LS_WILTY_EP73_ true8,7:18,7:26,0.0,LS_EP73,val,fold3
+LS_WILTY_EP7_lie1,data/raw/dolos/videos/LS_WILTY_EP7_lie1.mp4,1.0,LS,7,LS_EP7,391971.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie1,3:57,4:01,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie12,data/raw/dolos/videos/LS_WILTY_EP7_lie12.mp4,1.0,LS,7,LS_EP7,195339.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie12,19:33,19:36,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie2,data/raw/dolos/videos/LS_WILTY_EP7_lie2.mp4,1.0,LS,7,LS_EP7,251514.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie2,4:02,4:05,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie3,data/raw/dolos/videos/LS_WILTY_EP7_lie3.mp4,1.0,LS,7,LS_EP7,428629.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie3,4:59,5:04,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie4,data/raw/dolos/videos/LS_WILTY_EP7_lie4.mp4,1.0,LS,7,LS_EP7,443880.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie4,6:53,6:57,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie5,data/raw/dolos/videos/LS_WILTY_EP7_lie5.mp4,1.0,LS,7,LS_EP7,143345.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie5,7:15,7:20,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie6,data/raw/dolos/videos/LS_WILTY_EP7_lie6.mp4,1.0,LS,7,LS_EP7,268208.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie6,7:58,8:02,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie7,data/raw/dolos/videos/LS_WILTY_EP7_lie7.mp4,1.0,LS,7,LS_EP7,255807.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie7,15:51,15:58,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie8,data/raw/dolos/videos/LS_WILTY_EP7_lie8.mp4,1.0,LS,7,LS_EP7,480357.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie8,16:13,16:19,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_lie9,data/raw/dolos/videos/LS_WILTY_EP7_lie9.mp4,1.0,LS,7,LS_EP7,337164.0,False,E8DlNckBUFQ,LS_WILTY_EP7_lie9,18:37,18:42,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth10,data/raw/dolos/videos/LS_WILTY_EP7_truth10.mp4,0.0,LS,7,LS_EP7,276893.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth10,24:09,24:13,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth11,data/raw/dolos/videos/LS_WILTY_EP7_truth11.mp4,0.0,LS,7,LS_EP7,262652.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth11,25:32,25:37,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth12,data/raw/dolos/videos/LS_WILTY_EP7_truth12.mp4,0.0,LS,7,LS_EP7,364449.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth12,26:47,26:51,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth3,data/raw/dolos/videos/LS_WILTY_EP7_truth3.mp4,0.0,LS,7,LS_EP7,452141.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth3,16:03,16:09,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth5,data/raw/dolos/videos/LS_WILTY_EP7_truth5.mp4,0.0,LS,7,LS_EP7,144405.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth5,16:37,16:41,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth6,data/raw/dolos/videos/LS_WILTY_EP7_truth6.mp4,0.0,LS,7,LS_EP7,176369.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth6,20:14,20:19,1.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth7,data/raw/dolos/videos/LS_WILTY_EP7_truth7.mp4,0.0,LS,7,LS_EP7,218595.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth7,22:13,22:18,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth8,data/raw/dolos/videos/LS_WILTY_EP7_truth8.mp4,0.0,LS,7,LS_EP7,122139.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth8,22:38,22:41,0.0,LS_EP7,val,fold3
+LS_WILTY_EP7_truth9,data/raw/dolos/videos/LS_WILTY_EP7_truth9.mp4,0.0,LS,7,LS_EP7,220291.0,False,E8DlNckBUFQ,LS_WILTY_EP7_truth9,22:45,22:50,0.0,LS_EP7,val,fold3
+SB_WILTY_EP31_lie1,data/raw/dolos/videos/SB_WILTY_EP31_lie1.mp4,1.0,SB,31,SB_EP31,240437.0,False,8oe8NUESnpA,SB_WILTY_EP31_lie1,1:43,1:50,1.0,SB_EP31,val,fold3
+SB_WILTY_EP31_lie2,data/raw/dolos/videos/SB_WILTY_EP31_lie2.mp4,1.0,SB,31,SB_EP31,310923.0,False,8oe8NUESnpA,SB_WILTY_EP31_lie2,1:59,2:07,1.0,SB_EP31,val,fold3
+SB_WILTY_EP31_lie3,data/raw/dolos/videos/SB_WILTY_EP31_lie3.mp4,1.0,SB,31,SB_EP31,202185.0,False,8oe8NUESnpA,SB_WILTY_EP31_lie3,2:09,2:15,1.0,SB_EP31,val,fold3
+SB_WILTY_EP31_lie7,data/raw/dolos/videos/SB_WILTY_EP31_lie7.mp4,1.0,SB,31,SB_EP31,223036.0,False,8oe8NUESnpA,SB_WILTY_EP31_lie7,13:55,14:01,1.0,SB_EP31,val,fold3
+SB_WILTY_EP31_truth1,data/raw/dolos/videos/SB_WILTY_EP31_truth1.mp4,0.0,SB,31,SB_EP31,328358.0,False,8oe8NUESnpA,SB_WILTY_EP31_truth1,4:39,4:48,0.0,SB_EP31,val,fold3
+SB_WILTY_EP31_truth3,data/raw/dolos/videos/SB_WILTY_EP31_truth3.mp4,0.0,SB,31,SB_EP31,204914.0,False,8oe8NUESnpA,SB_WILTY_EP31_truth3,5:20,5:24,0.0,SB_EP31,val,fold3
+SB_WILTY_EP31_truth6,data/raw/dolos/videos/SB_WILTY_EP31_truth6.mp4,0.0,SB,31,SB_EP31,238153.0,False,8oe8NUESnpA,SB_WILTY_EP31_truth6,8:38,8:44,0.0,SB_EP31,val,fold3
+SB_WILTY_EP31_truth7,data/raw/dolos/videos/SB_WILTY_EP31_truth7.mp4,0.0,SB,31,SB_EP31,276407.0,False,8oe8NUESnpA,SB_WILTY_EP31_truth7,10:36,10:44,0.0,SB_EP31,val,fold3
+SB_WILTY_EP31_truth8,data/raw/dolos/videos/SB_WILTY_EP31_truth8.mp4,0.0,SB,31,SB_EP31,195867.0,False,8oe8NUESnpA,SB_WILTY_EP31_truth8,13:15,13:22,0.0,SB_EP31,val,fold3
+SB_WILTY_EP32_lie10,data/raw/dolos/videos/SB_WILTY_EP32_lie10.mp4,1.0,SB,32,SB_EP32,329987.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie10,7:27,7:34,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie11,data/raw/dolos/videos/SB_WILTY_EP32_lie11.mp4,1.0,SB,32,SB_EP32,215693.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie11,7:47,7:51,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie12,data/raw/dolos/videos/SB_WILTY_EP32_lie12.mp4,1.0,SB,32,SB_EP32,330013.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie12,8:20,8:26,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie14,data/raw/dolos/videos/SB_WILTY_EP32_lie14.mp4,1.0,SB,32,SB_EP32,308900.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie14,9:34,9:40,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie15,data/raw/dolos/videos/SB_WILTY_EP32_lie15.mp4,1.0,SB,32,SB_EP32,449605.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie15,11:12,11:21,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie6,data/raw/dolos/videos/SB_WILTY_EP32_lie6.mp4,1.0,SB,32,SB_EP32,287086.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie6,2:50,2:55,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie7,data/raw/dolos/videos/SB_WILTY_EP32_lie7.mp4,1.0,SB,32,SB_EP32,449713.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie7,3:19,3:26,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_lie8,data/raw/dolos/videos/SB_WILTY_EP32_lie8.mp4,1.0,SB,32,SB_EP32,188410.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_lie8,7:05,7:09,1.0,SB_EP32,val,fold3
+SB_WILTY_EP32_truth2,data/raw/dolos/videos/SB_WILTY_EP32_truth2.mp4,0.0,SB,32,SB_EP32,387498.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_truth2,2:04,2:11,0.0,SB_EP32,val,fold3
+SB_WILTY_EP32_truth3,data/raw/dolos/videos/SB_WILTY_EP32_truth3.mp4,0.0,SB,32,SB_EP32,450095.0,False,Ipb8dXlJqO4,SB_WILTY_EP32_truth3,2:15,2:24,0.0,SB_EP32,val,fold3
+SB_WILTY_EP36_lie1,data/raw/dolos/videos/SB_WILTY_EP36_lie1.mp4,1.0,SB,36,SB_EP36,466833.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie1,0:26,0:34,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie2,data/raw/dolos/videos/SB_WILTY_EP36_lie2.mp4,1.0,SB,36,SB_EP36,383758.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie2,0:49,0:55,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie3,data/raw/dolos/videos/SB_WILTY_EP36_lie3.mp4,1.0,SB,36,SB_EP36,663015.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie3,1:06,1:14,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie4,data/raw/dolos/videos/SB_WILTY_EP36_lie4.mp4,1.0,SB,36,SB_EP36,343456.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie4,1:22,1:28,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie5,data/raw/dolos/videos/SB_WILTY_EP36_lie5.mp4,1.0,SB,36,SB_EP36,245130.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie5,1:48,1:52,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie6,data/raw/dolos/videos/SB_WILTY_EP36_lie6.mp4,1.0,SB,36,SB_EP36,517968.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie6,3:55,4:03,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie7,data/raw/dolos/videos/SB_WILTY_EP36_lie7.mp4,1.0,SB,36,SB_EP36,275964.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie7,4:15,4:19,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie8,data/raw/dolos/videos/SB_WILTY_EP36_lie8.mp4,1.0,SB,36,SB_EP36,654693.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie8,5:03,5:11,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_lie9,data/raw/dolos/videos/SB_WILTY_EP36_lie9.mp4,1.0,SB,36,SB_EP36,317000.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_lie9,5:18,5:22,1.0,SB_EP36,val,fold3
+SB_WILTY_EP36_truth1,data/raw/dolos/videos/SB_WILTY_EP36_truth1.mp4,0.0,SB,36,SB_EP36,307531.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_truth1,0:40,0:45,0.0,SB_EP36,val,fold3
+SB_WILTY_EP36_truth2,data/raw/dolos/videos/SB_WILTY_EP36_truth2.mp4,0.0,SB,36,SB_EP36,553962.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_truth2,2:43,2:52,0.0,SB_EP36,val,fold3
+SB_WILTY_EP36_truth3,data/raw/dolos/videos/SB_WILTY_EP36_truth3.mp4,0.0,SB,36,SB_EP36,441449.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_truth3,7:23,7:30,0.0,SB_EP36,val,fold3
+SB_WILTY_EP36_truth4,data/raw/dolos/videos/SB_WILTY_EP36_truth4.mp4,0.0,SB,36,SB_EP36,651822.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_truth4,7:43,7:53,0.0,SB_EP36,val,fold3
+SB_WILTY_EP36_truth5,data/raw/dolos/videos/SB_WILTY_EP36_truth5.mp4,0.0,SB,36,SB_EP36,334776.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_truth5,8:35,8:40,0.0,SB_EP36,val,fold3
+SB_WILTY_EP36_truth6,data/raw/dolos/videos/SB_WILTY_EP36_truth6.mp4,0.0,SB,36,SB_EP36,387942.0,False,OfRZO8-H-Sg,SB_WILTY_EP36_truth6,8:42,8:48,0.0,SB_EP36,val,fold3
+YW_WILTY_EP45_lie1,data/raw/dolos/videos/YW_WILTY_EP45_lie1.mp4,1.0,YW,45,YW_EP45,183723.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie1,6:21,6:24,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie11,data/raw/dolos/videos/YW_WILTY_EP45_lie11.mp4,1.0,YW,45,YW_EP45,152682.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie11,15:15,15:18,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie13,data/raw/dolos/videos/YW_WILTY_EP45_lie13.mp4,1.0,YW,45,YW_EP45,398568.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie13,15:56,16:01,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie16,data/raw/dolos/videos/YW_WILTY_EP45_lie16.mp4,1.0,YW,45,YW_EP45,512262.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie16,18:08,18:16,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie18,data/raw/dolos/videos/YW_WILTY_EP45_lie18.mp4,1.0,YW,45,YW_EP45,448894.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie18,18:53,18:57,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie2,data/raw/dolos/videos/YW_WILTY_EP45_lie2.mp4,1.0,YW,45,YW_EP45,190906.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie2,6:26,6:29,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie3,data/raw/dolos/videos/YW_WILTY_EP45_lie3.mp4,1.0,YW,45,YW_EP45,460457.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie3,6:41,6:46,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_lie5,data/raw/dolos/videos/YW_WILTY_EP45_lie5.mp4,1.0,YW,45,YW_EP45,317345.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_lie5,7:25,7:31,1.0,YW_EP45,val,fold3
+YW_WILTY_EP45_truth1,data/raw/dolos/videos/YW_WILTY_EP45_truth1.mp4,0.0,YW,45,YW_EP45,221610.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_truth1,3:12,3:16,0.0,YW_EP45,val,fold3
+YW_WILTY_EP45_truth2,data/raw/dolos/videos/YW_WILTY_EP45_truth2.mp4,0.0,YW,45,YW_EP45,360627.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_truth2,10:15,10:20,0.0,YW_EP45,val,fold3
+YW_WILTY_EP45_truth4,data/raw/dolos/videos/YW_WILTY_EP45_truth4.mp4,0.0,YW,45,YW_EP45,446486.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_truth4,10:49,10:55,0.0,YW_EP45,val,fold3
+YW_WILTY_EP45_truth5,data/raw/dolos/videos/YW_WILTY_EP45_truth5.mp4,0.0,YW,45,YW_EP45,414443.0,False,L2dK_5Zg5Rg,YW_WILTY_EP45_truth5,12:20,12:26,0.0,YW_EP45,val,fold3

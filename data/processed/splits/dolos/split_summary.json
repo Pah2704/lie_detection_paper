@@ -1,0 +1,101 @@
+{
+  "seed": 42,
+  "folds": 3,
+  "val_fraction": 0.15,
+  "group_column": "episode_group_id",
+  "group_note": "grouped by episode; subject identity across episodes not verified",
+  "protocol_source": "data/DOLOS/Training_Protocols",
+  "scanned_videos": 1472,
+  "missing_metadata_rows": 205,
+  "duplicate_video_id_rows": 2,
+  "duration_excluded_rows": 15,
+  "usable_rows": 1457,
+  "all_label_counts": {
+    "1": 775,
+    "0": 682
+  },
+  "splits": {
+    "fold1": {
+      "train": {
+        "num_rows": 858,
+        "num_groups": 59,
+        "label_counts": {
+          "1.0": 447,
+          "0.0": 411
+        }
+      },
+      "val": {
+        "num_rows": 88,
+        "num_groups": 8,
+        "label_counts": {
+          "1.0": 52,
+          "0.0": 36
+        }
+      },
+      "test": {
+        "num_rows": 485,
+        "num_groups": 67,
+        "label_counts": {
+          "1.0": 258,
+          "0.0": 227
+        }
+      }
+    },
+    "fold2": {
+      "train": {
+        "num_rows": 833,
+        "num_groups": 60,
+        "label_counts": {
+          "1.0": 433,
+          "0.0": 400
+        }
+      },
+      "val": {
+        "num_rows": 115,
+        "num_groups": 7,
+        "label_counts": {
+          "1.0": 70,
+          "0.0": 45
+        }
+      },
+      "test": {
+        "num_rows": 483,
+        "num_groups": 66,
+        "label_counts": {
+          "1.0": 254,
+          "0.0": 229
+        }
+      }
+    },
+    "fold3": {
+      "train": {
+        "num_rows": 837,
+        "num_groups": 58,
+        "label_counts": {
+          "1.0": 434,
+          "0.0": 403
+        }
+      },
+      "val": {
+        "num_rows": 130,
+        "num_groups": 9,
+        "label_counts": {
+          "1.0": 78,
+          "0.0": 52
+        }
+      },
+      "test": {
+        "num_rows": 464,
+        "num_groups": 66,
+        "label_counts": {
+          "1.0": 245,
+          "0.0": 219
+        }
+      }
+    }
+  },
+  "official_protocol_missing_downloaded_rows": 645,
+  "official_protocol_overlaps_removed_rows": 2,
+  "official_protocol_unassigned_downloaded_rows": 78,
+  "official_protocol_unassigned_downloaded_unique": 26
+}

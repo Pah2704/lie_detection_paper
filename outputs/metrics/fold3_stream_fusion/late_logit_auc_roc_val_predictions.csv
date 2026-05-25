@@ -1,0 +1,131 @@
+video_id,label,score_lie,fusion_method
+AN_WILTY_EP21_lie1,1,0.520279883647944,late_logit_auc_roc
+AN_WILTY_EP21_lie11,1,0.53845067375617,late_logit_auc_roc
+AN_WILTY_EP21_lie12,1,0.5143605498207924,late_logit_auc_roc
+AN_WILTY_EP21_lie13,1,0.536545507536839,late_logit_auc_roc
+AN_WILTY_EP21_lie14,1,0.5285592829540249,late_logit_auc_roc
+AN_WILTY_EP21_lie15,1,0.5398240507101165,late_logit_auc_roc
+AN_WILTY_EP21_lie16,1,0.5368591584925181,late_logit_auc_roc
+AN_WILTY_EP21_lie17,1,0.5399963181754773,late_logit_auc_roc
+AN_WILTY_EP21_lie5,1,0.5209995257658395,late_logit_auc_roc
+AN_WILTY_EP21_lie6,1,0.5377852244015691,late_logit_auc_roc
+AN_WILTY_EP21_lie7,1,0.5168938594883454,late_logit_auc_roc
+AN_WILTY_EP21_lie9,1,0.5257065891364471,late_logit_auc_roc
+AN_WILTY_EP21_truth19,0,0.528319086346455,late_logit_auc_roc
+AN_WILTY_EP21_truth2,0,0.5318363849359065,late_logit_auc_roc
+AN_WILTY_EP21_truth21,0,0.5216921356271677,late_logit_auc_roc
+AN_WILTY_EP21_truth4,0,0.5229175376462516,late_logit_auc_roc
+AN_WILTY_EP22_lie10,1,0.5255648428380529,late_logit_auc_roc
+AN_WILTY_EP22_lie12,1,0.5286869446137736,late_logit_auc_roc
+AN_WILTY_EP22_lie16,1,0.5438788182558449,late_logit_auc_roc
+AN_WILTY_EP22_lie21,1,0.5370034624574693,late_logit_auc_roc
+AN_WILTY_EP22_lie22,1,0.5159906642966666,late_logit_auc_roc
+AN_WILTY_EP22_lie24,1,0.5193566151327261,late_logit_auc_roc
+AN_WILTY_EP22_lie25,1,0.5330612634349575,late_logit_auc_roc
+AN_WILTY_EP22_lie27,1,0.5243257164341928,late_logit_auc_roc
+AN_WILTY_EP22_lie28,1,0.5359411493470427,late_logit_auc_roc
+AN_WILTY_EP22_lie29,1,0.5309315083120376,late_logit_auc_roc
+AN_WILTY_EP22_lie30,0,0.525936733704251,late_logit_auc_roc
+AN_WILTY_EP22_lie5,1,0.5458892068460716,late_logit_auc_roc
+AN_WILTY_EP22_lie7,1,0.5174020167165998,late_logit_auc_roc
+AN_WILTY_EP22_lie8,1,0.5343470408916797,late_logit_auc_roc
+AN_WILTY_EP22_lie9,1,0.5384745371920248,late_logit_auc_roc
+AN_WILTY_EP22_truth13,0,0.5279373648378952,late_logit_auc_roc
+AN_WILTY_EP22_truth14,0,0.5276788094943846,late_logit_auc_roc
+AN_WILTY_EP22_truth15,0,0.533722672932252,late_logit_auc_roc
+AN_WILTY_EP22_truth18,0,0.5258295500703808,late_logit_auc_roc
+AN_WILTY_EP22_truth20,0,0.5356205538966486,late_logit_auc_roc
+AN_WILTY_EP22_truth4,0,0.514296220187618,late_logit_auc_roc
+LS_WILTY_EP2_lie11,1,0.5536721171497425,late_logit_auc_roc
+LS_WILTY_EP2_lie2,1,0.5554366566247668,late_logit_auc_roc
+LS_WILTY_EP2_lie5,1,0.5296629496518095,late_logit_auc_roc
+LS_WILTY_EP2_lie6,1,0.5250743333325698,late_logit_auc_roc
+LS_WILTY_EP2_truth1,0,0.5303431743008734,late_logit_auc_roc
+LS_WILTY_EP2_truth5,0,0.5241513985736683,late_logit_auc_roc
+LS_WILTY_EP2_truth6,0,0.5209717734585391,late_logit_auc_roc
+LS_WILTY_EP73_ lie1,1,0.5259188566447018,late_logit_auc_roc
+LS_WILTY_EP73_ lie2,1,0.5231976045721275,late_logit_auc_roc
+LS_WILTY_EP73_ lie3,1,0.5228293893957333,late_logit_auc_roc
+LS_WILTY_EP73_ lie4,1,0.532109574303802,late_logit_auc_roc
+LS_WILTY_EP73_ lie5,1,0.5206092286853217,late_logit_auc_roc
+LS_WILTY_EP73_ lie6,1,0.5170852178162944,late_logit_auc_roc
+LS_WILTY_EP73_ lie7,1,0.5290795557960184,late_logit_auc_roc
+LS_WILTY_EP73_ lie8,1,0.5247720912007656,late_logit_auc_roc
+LS_WILTY_EP73_ true1,0,0.5152657421304622,late_logit_auc_roc
+LS_WILTY_EP73_ true10,0,0.5221073956676056,late_logit_auc_roc
+LS_WILTY_EP73_ true11,0,0.5234650881767289,late_logit_auc_roc
+LS_WILTY_EP73_ true13,0,0.5341438772421451,late_logit_auc_roc
+LS_WILTY_EP73_ true14,0,0.5150591378380577,late_logit_auc_roc
+LS_WILTY_EP73_ true16,0,0.5125670096973997,late_logit_auc_roc
+LS_WILTY_EP73_ true17,0,0.5137169120403019,late_logit_auc_roc
+LS_WILTY_EP73_ true18,0,0.5068633831502786,late_logit_auc_roc
+LS_WILTY_EP73_ true3,0,0.5097065767694628,late_logit_auc_roc
+LS_WILTY_EP73_ true4,0,0.5102944124959974,late_logit_auc_roc
+LS_WILTY_EP73_ true5,0,0.5180900431035022,late_logit_auc_roc
+LS_WILTY_EP73_ true7,0,0.5306142059130848,late_logit_auc_roc
+LS_WILTY_EP73_ true8,0,0.5329831296377381,late_logit_auc_roc
+LS_WILTY_EP7_lie1,1,0.5230047262077037,late_logit_auc_roc
+LS_WILTY_EP7_lie12,1,0.5232442975487702,late_logit_auc_roc
+LS_WILTY_EP7_lie2,1,0.5425340522075893,late_logit_auc_roc
+LS_WILTY_EP7_lie3,1,0.5306902989368617,late_logit_auc_roc
+LS_WILTY_EP7_lie4,1,0.54036962589366,late_logit_auc_roc
+LS_WILTY_EP7_lie5,1,0.5285361777350217,late_logit_auc_roc
+LS_WILTY_EP7_lie6,1,0.5368614234214101,late_logit_auc_roc
+LS_WILTY_EP7_lie7,1,0.5267693587605566,late_logit_auc_roc
+LS_WILTY_EP7_lie8,1,0.5247849405768847,late_logit_auc_roc
+LS_WILTY_EP7_lie9,1,0.5534368467382935,late_logit_auc_roc
+LS_WILTY_EP7_truth10,0,0.5217855163751166,late_logit_auc_roc
+LS_WILTY_EP7_truth11,0,0.5319105626131349,late_logit_auc_roc
+LS_WILTY_EP7_truth12,0,0.5263383203675809,late_logit_auc_roc
+LS_WILTY_EP7_truth3,0,0.5252508071516689,late_logit_auc_roc
+LS_WILTY_EP7_truth5,0,0.520272124358647,late_logit_auc_roc
+LS_WILTY_EP7_truth6,1,0.548698321447244,late_logit_auc_roc
+LS_WILTY_EP7_truth7,0,0.5281805840813957,late_logit_auc_roc
+LS_WILTY_EP7_truth8,0,0.5320090704617734,late_logit_auc_roc
+LS_WILTY_EP7_truth9,0,0.5342724951818218,late_logit_auc_roc
+SB_WILTY_EP31_lie1,1,0.5333136913641394,late_logit_auc_roc
+SB_WILTY_EP31_lie2,1,0.5385994512078625,late_logit_auc_roc
+SB_WILTY_EP31_lie3,1,0.5185002470323942,late_logit_auc_roc
+SB_WILTY_EP31_lie7,1,0.5437730780607859,late_logit_auc_roc
+SB_WILTY_EP31_truth1,0,0.5238875852269737,late_logit_auc_roc
+SB_WILTY_EP31_truth3,0,0.5246049928126033,late_logit_auc_roc
+SB_WILTY_EP31_truth6,0,0.5243148297948207,late_logit_auc_roc
+SB_WILTY_EP31_truth7,0,0.5307536928146191,late_logit_auc_roc
+SB_WILTY_EP31_truth8,0,0.5209108561124923,late_logit_auc_roc
+SB_WILTY_EP32_lie10,1,0.522228046004398,late_logit_auc_roc
+SB_WILTY_EP32_lie11,1,0.5358866698150171,late_logit_auc_roc
+SB_WILTY_EP32_lie12,1,0.5220162457808489,late_logit_auc_roc
+SB_WILTY_EP32_lie14,1,0.5298132636354738,late_logit_auc_roc
+SB_WILTY_EP32_lie15,1,0.5293204815900243,late_logit_auc_roc
+SB_WILTY_EP32_lie6,1,0.5358716541612764,late_logit_auc_roc
+SB_WILTY_EP32_lie7,1,0.5405326927106774,late_logit_auc_roc
+SB_WILTY_EP32_lie8,1,0.5382125724978307,late_logit_auc_roc
+SB_WILTY_EP32_truth2,0,0.5310794935142421,late_logit_auc_roc
+SB_WILTY_EP32_truth3,0,0.5265558719321705,late_logit_auc_roc
+SB_WILTY_EP36_lie1,1,0.5257905318414153,late_logit_auc_roc
+SB_WILTY_EP36_lie2,1,0.5361760663975051,late_logit_auc_roc
+SB_WILTY_EP36_lie3,1,0.5363384512606274,late_logit_auc_roc
+SB_WILTY_EP36_lie4,1,0.5424578041564199,late_logit_auc_roc
+SB_WILTY_EP36_lie5,1,0.5319552563490713,late_logit_auc_roc
+SB_WILTY_EP36_lie6,1,0.5241914430616039,late_logit_auc_roc
+SB_WILTY_EP36_lie7,1,0.5322883135047278,late_logit_auc_roc
+SB_WILTY_EP36_lie8,1,0.5340354539372546,late_logit_auc_roc
+SB_WILTY_EP36_lie9,1,0.5275898545891367,late_logit_auc_roc
+SB_WILTY_EP36_truth1,0,0.5464327382886196,late_logit_auc_roc
+SB_WILTY_EP36_truth2,0,0.5316223566596825,late_logit_auc_roc
+SB_WILTY_EP36_truth3,0,0.5234099965104173,late_logit_auc_roc
+SB_WILTY_EP36_truth4,0,0.5377642701330728,late_logit_auc_roc
+SB_WILTY_EP36_truth5,0,0.5255124227411245,late_logit_auc_roc
+SB_WILTY_EP36_truth6,0,0.5219639787649023,late_logit_auc_roc
+YW_WILTY_EP45_lie1,1,0.5479026167777651,late_logit_auc_roc
+YW_WILTY_EP45_lie11,1,0.5489721248345365,late_logit_auc_roc
+YW_WILTY_EP45_lie13,1,0.5087686546468412,late_logit_auc_roc
+YW_WILTY_EP45_lie16,1,0.5465840025648944,late_logit_auc_roc
+YW_WILTY_EP45_lie18,1,0.556160244292459,late_logit_auc_roc
+YW_WILTY_EP45_lie2,1,0.5406112024887897,late_logit_auc_roc
+YW_WILTY_EP45_lie3,1,0.5290709826693758,late_logit_auc_roc
+YW_WILTY_EP45_lie5,1,0.5283702080430581,late_logit_auc_roc
+YW_WILTY_EP45_truth1,0,0.5135231090956135,late_logit_auc_roc
+YW_WILTY_EP45_truth2,0,0.5239410910778963,late_logit_auc_roc
+YW_WILTY_EP45_truth4,0,0.5283444426062314,late_logit_auc_roc
+YW_WILTY_EP45_truth5,0,0.5270888322020263,late_logit_auc_roc

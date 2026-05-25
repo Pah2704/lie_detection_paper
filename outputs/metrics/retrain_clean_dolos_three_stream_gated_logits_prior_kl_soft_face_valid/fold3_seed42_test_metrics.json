@@ -1,0 +1,103 @@
+{
+  "accuracy": 0.540948275862069,
+  "balanced_accuracy": 0.5565837293821638,
+  "precision_lie": 0.6538461538461539,
+  "recall_lie": 0.27755102040816326,
+  "f1_lie": 0.38968481375358166,
+  "macro_f1": 0.510904583042594,
+  "confusion_matrix": [
+    [
+      183,
+      36
+    ],
+    [
+      177,
+      68
+    ]
+  ],
+  "threshold": 0.5,
+  "auc_roc": 0.605721740751095,
+  "auc_pr": 0.6306866579129412,
+  "bootstrap_95ci": {
+    "accuracy": {
+      "low": 0.49779094827586207,
+      "high": 0.5862068965517241
+    },
+    "f1_lie": {
+      "low": 0.322382049484123,
+      "high": 0.4543237226436164
+    },
+    "auc_roc": {
+      "low": 0.5581427311347927,
+      "high": 0.655412830660033
+    }
+  },
+  "calibrated_threshold_metrics": {
+    "accuracy": 0.5668103448275862,
+    "balanced_accuracy": 0.562175006989097,
+    "precision_lie": 0.5808823529411765,
+    "recall_lie": 0.6448979591836734,
+    "f1_lie": 0.6112185686653772,
+    "macro_f1": 0.5610837368874331,
+    "confusion_matrix": [
+      [
+        105,
+        114
+      ],
+      [
+        87,
+        158
+      ]
+    ],
+    "threshold": 0.49590177834033966,
+    "auc_roc": 0.605721740751095,
+    "auc_pr": 0.6306866579129412
+  },
+  "threshold_calibration": {
+    "threshold": 0.49590177834033966,
+    "metric": "balanced_accuracy",
+    "metric_value": 0.6217948717948718
+  },
+  "val_metrics_default_threshold": {
+    "accuracy": 0.49230769230769234,
+    "balanced_accuracy": 0.5673076923076923,
+    "precision_lie": 0.8333333333333334,
+    "recall_lie": 0.19230769230769232,
+    "f1_lie": 0.3125,
+    "macro_f1": 0.45503048780487804,
+    "confusion_matrix": [
+      [
+        49,
+        3
+      ],
+      [
+        63,
+        15
+      ]
+    ],
+    "threshold": 0.5,
+    "auc_roc": 0.6466962524654831,
+    "auc_pr": 0.732018832984604
+  },
+  "val_metrics_calibrated_threshold": {
+    "accuracy": 0.6307692307692307,
+    "balanced_accuracy": 0.6217948717948718,
+    "precision_lie": 0.7027027027027027,
+    "recall_lie": 0.6666666666666666,
+    "f1_lie": 0.6842105263157895,
+    "macro_f1": 0.6198830409356726,
+    "confusion_matrix": [
+      [
+        30,
+        22
+      ],
+      [
+        26,
+        52
+      ]
+    ],
+    "threshold": 0.49590177834033966,
+    "auc_roc": 0.6466962524654831,
+    "auc_pr": 0.732018832984604
+  }
+}

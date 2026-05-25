@@ -1,0 +1,143 @@
+{
+  "fold": "fold2",
+  "seed": 42,
+  "best_epoch": 12,
+  "best_val_metric_name": "auc_roc",
+  "best_val_metric": 0.646984126984127,
+  "best_val_f1_lie": 0.7133757961783439,
+  "best_val_auc_roc": 0.646984126984127,
+  "best_val_balanced_accuracy": 0.5555555555555556,
+  "checkpoint": "outputs/checkpoints/dolos_three_stream_gated_logits_prior_kl/fold2_seed42_best.pt",
+  "loss_name": "ce",
+  "label_imbalance": 0.03846153989434242,
+  "threshold_calibration": {
+    "threshold": 0.5355864841313589,
+    "metric": "balanced_accuracy",
+    "metric_value": 0.6293650793650793
+  },
+  "test_metrics_calibrated_threshold": {
+    "accuracy": 0.5933609958506224,
+    "balanced_accuracy": 0.6043633602015983,
+    "precision_lie": 0.708029197080292,
+    "recall_lie": 0.383399209486166,
+    "f1_lie": 0.49743589743589745,
+    "macro_f1": 0.5779862414008756,
+    "confusion_matrix": [
+      [
+        189,
+        40
+      ],
+      [
+        156,
+        97
+      ]
+    ],
+    "threshold": 0.5355864841313589,
+    "auc_roc": 0.6772528781262406,
+    "auc_pr": 0.679869076530359
+  },
+  "test_metrics": {
+    "accuracy": 0.6016597510373444,
+    "balanced_accuracy": 0.5886566442860348,
+    "precision_lie": 0.5826558265582655,
+    "recall_lie": 0.849802371541502,
+    "f1_lie": 0.6913183279742765,
+    "macro_f1": 0.5649574096011734,
+    "confusion_matrix": [
+      [
+        75,
+        154
+      ],
+      [
+        38,
+        215
+      ]
+    ],
+    "threshold": 0.5,
+    "auc_roc": 0.6772528781262406,
+    "auc_pr": 0.679869076530359,
+    "bootstrap_95ci": {
+      "accuracy": {
+        "low": 0.558039419087137,
+        "high": 0.6473029045643154
+      },
+      "f1_lie": {
+        "low": 0.6488987381786571,
+        "high": 0.7328267981603528
+      },
+      "auc_roc": {
+        "low": 0.6266892241379312,
+        "high": 0.7245951490145998
+      }
+    },
+    "calibrated_threshold_metrics": {
+      "accuracy": 0.5933609958506224,
+      "balanced_accuracy": 0.6043633602015983,
+      "precision_lie": 0.708029197080292,
+      "recall_lie": 0.383399209486166,
+      "f1_lie": 0.49743589743589745,
+      "macro_f1": 0.5779862414008756,
+      "confusion_matrix": [
+        [
+          189,
+          40
+        ],
+        [
+          156,
+          97
+        ]
+      ],
+      "threshold": 0.5355864841313589,
+      "auc_roc": 0.6772528781262406,
+      "auc_pr": 0.679869076530359
+    },
+    "threshold_calibration": {
+      "threshold": 0.5355864841313589,
+      "metric": "balanced_accuracy",
+      "metric_value": 0.6293650793650793
+    },
+    "val_metrics_default_threshold": {
+      "accuracy": 0.6086956521739131,
+      "balanced_accuracy": 0.5555555555555556,
+      "precision_lie": 0.6436781609195402,
+      "recall_lie": 0.8,
+      "f1_lie": 0.7133757961783439,
+      "macro_f1": 0.5484687200069802,
+      "confusion_matrix": [
+        [
+          14,
+          31
+        ],
+        [
+          14,
+          56
+        ]
+      ],
+      "threshold": 0.5,
+      "auc_roc": 0.646984126984127,
+      "auc_pr": 0.749882402754587
+    },
+    "val_metrics_calibrated_threshold": {
+      "accuracy": 0.5826086956521739,
+      "balanced_accuracy": 0.6293650793650793,
+      "precision_lie": 0.8055555555555556,
+      "recall_lie": 0.4142857142857143,
+      "f1_lie": 0.5471698113207547,
+      "macro_f1": 0.5800365185636032,
+      "confusion_matrix": [
+        [
+          38,
+          7
+        ],
+        [
+          41,
+          29
+        ]
+      ],
+      "threshold": 0.5355864841313589,
+      "auc_roc": 0.646984126984127,
+      "auc_pr": 0.749882402754587
+    }
+  },
+  "note": "Eval-only summary from fold2 best checkpoint after fold2 training process was interrupted by /tmp full DataLoader hang."
+}

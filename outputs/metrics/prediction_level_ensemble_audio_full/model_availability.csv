@@ -1,0 +1,11 @@
+model,metrics_dir,available_folds,num_available_folds,selected
+cross_attention_auc,outputs/metrics/dolos_three_stream_auc,"fold1,fold2,fold3",3,True
+gated_prior_kl,outputs/metrics/dolos_three_stream_gated_logits_prior_kl,"fold1,fold2,fold3",3,True
+gated_temp_aux,outputs/metrics/dolos_three_stream_gated_logits_temp_aux,"fold1,fold3",2,False
+gated_margin_norm,outputs/metrics/dolos_three_stream_gated_margin_norm,fold1,1,False
+audio_only,outputs/metrics/dolos_fold3_audio_only,"fold1,fold2,fold3",3,True
+spatial_only,outputs/metrics/dolos_fold3_spatial_only,fold3,1,False
+spatial_skip1s,outputs/metrics/dolos_fold3_spatial_skip1s,fold3,1,False
+spatial_clean_faces,outputs/metrics/dolos_fold3_spatial_clean_faces,fold3,1,False
+flow_only,outputs/metrics/dolos_fold3_flow_only,fold3,1,False
+flow_clean_faces,outputs/metrics/dolos_fold3_flow_clean_faces,fold3,1,False

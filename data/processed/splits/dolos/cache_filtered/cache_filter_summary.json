@@ -1,0 +1,100 @@
+{
+  "dataset": "dolos",
+  "source_split_dir": "data/processed/splits/dolos",
+  "out_dir": "data/processed/splits/dolos/cache_filtered",
+  "audio_dir": "data/processed/audio/dolos",
+  "face_manifest": "data/processed/faces_224_clean/dolos/preprocess_manifest.csv",
+  "optflow_manifest": "data/processed/optflow_clean/dolos/optflow_manifest.csv",
+  "validate_npz": false,
+  "input_unique_video_ids": 1431,
+  "valid_unique_video_ids": 1429,
+  "excluded_unique_video_ids": 2,
+  "split_files": {
+    "fold1_test.csv": {
+      "input_rows": 485,
+      "output_rows": 484,
+      "removed_rows": 1,
+      "label_counts": {
+        "1.0": 257,
+        "0.0": 227
+      }
+    },
+    "fold1_train.csv": {
+      "input_rows": 858,
+      "output_rows": 857,
+      "removed_rows": 1,
+      "label_counts": {
+        "1.0": 446,
+        "0.0": 411
+      }
+    },
+    "fold1_val.csv": {
+      "input_rows": 88,
+      "output_rows": 88,
+      "removed_rows": 0,
+      "label_counts": {
+        "1.0": 52,
+        "0.0": 36
+      }
+    },
+    "fold2_test.csv": {
+      "input_rows": 483,
+      "output_rows": 482,
+      "removed_rows": 1,
+      "label_counts": {
+        "1.0": 253,
+        "0.0": 229
+      }
+    },
+    "fold2_train.csv": {
+      "input_rows": 833,
+      "output_rows": 832,
+      "removed_rows": 1,
+      "label_counts": {
+        "1.0": 432,
+        "0.0": 400
+      }
+    },
+    "fold2_val.csv": {
+      "input_rows": 115,
+      "output_rows": 115,
+      "removed_rows": 0,
+      "label_counts": {
+        "1.0": 70,
+        "0.0": 45
+      }
+    },
+    "fold3_test.csv": {
+      "input_rows": 464,
+      "output_rows": 464,
+      "removed_rows": 0,
+      "label_counts": {
+        "1.0": 245,
+        "0.0": 219
+      }
+    },
+    "fold3_train.csv": {
+      "input_rows": 837,
+      "output_rows": 835,
+      "removed_rows": 2,
+      "label_counts": {
+        "1.0": 432,
+        "0.0": 403
+      }
+    },
+    "fold3_val.csv": {
+      "input_rows": 130,
+      "output_rows": 130,
+      "removed_rows": 0,
+      "label_counts": {
+        "1.0": 78,
+        "0.0": 52
+      }
+    }
+  },
+  "metadata_rows": 1429,
+  "metadata_label_counts": {
+    "1": 755,
+    "0": 674
+  }
+}

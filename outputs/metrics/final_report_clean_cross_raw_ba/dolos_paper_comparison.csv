@@ -1,0 +1,9 @@
+source_group,method,acc,f1_lie,auc_roc,balanced_accuracy,notes
+paper,DOLOS paper Visual,0.6144,0.6942,0.5889,,Table 2
+paper,DOLOS paper Audio,0.5919,0.7345999999999999,0.5254,,Table 2
+paper,DOLOS paper Concatenation,0.6162,0.7020000000000001,0.605,,Table 2
+paper,DOLOS paper PAVF,0.6475,0.7120000000000001,0.6271,,Table 2
+paper,DOLOS paper PAVF + Multi-task,0.6684,0.7334999999999999,0.6457999999999999,,Table 2
+ours,Cross-attention AUC baseline,0.5615055949786502,0.4805800533255676,0.6059034476700981,0.5670284283549615,mean over fold calibrated thresholds
+ours,Gated logits prior-KL,0.5725754550539276,0.5650424069309345,0.6141764236861088,0.5750627021900478,mean over fold calibrated thresholds
+ours,Final ensemble raw-BA,0.576671176902547,0.570474372664418,0.6196886578124254,0.5792041103319956,mean over fold calibrated thresholds

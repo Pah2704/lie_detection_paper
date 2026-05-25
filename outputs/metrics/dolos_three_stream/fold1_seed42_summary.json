@@ -1,0 +1,43 @@
+{
+  "fold": "fold1",
+  "seed": 42,
+  "best_epoch": 7,
+  "best_val_f1_lie": 0.7482014388489209,
+  "checkpoint": "outputs/checkpoints/dolos_three_stream/fold1_seed42_best.pt",
+  "loss_name": "ce",
+  "label_imbalance": 0.04084014147520065,
+  "test_metrics": {
+    "accuracy": 0.5475206611570248,
+    "balanced_accuracy": 0.5178782632544268,
+    "precision_lie": 0.540084388185654,
+    "recall_lie": 0.9961089494163424,
+    "f1_lie": 0.7004103967168263,
+    "macro_f1": 0.3881798819027169,
+    "confusion_matrix": [
+      [
+        9,
+        218
+      ],
+      [
+        1,
+        256
+      ]
+    ],
+    "auc_roc": 0.5647594233703013,
+    "auc_pr": 0.6048018645827803,
+    "bootstrap_95ci": {
+      "accuracy": {
+        "low": 0.5,
+        "high": 0.5888946280991735
+      },
+      "f1_lie": {
+        "low": 0.6572627528698202,
+        "high": 0.7354497354497355
+      },
+      "auc_roc": {
+        "low": 0.5141961268273741,
+        "high": 0.6147060445481094
+      }
+    }
+  }
+}
