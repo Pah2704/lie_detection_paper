@@ -1,0 +1,21 @@
+{
+  "accuracy": 0.3923076923076923,
+  "balanced_accuracy": 0.49038461538461536,
+  "precision_lie": 0.0,
+  "recall_lie": 0.0,
+  "f1_lie": 0.0,
+  "macro_f1": 0.281767955801105,
+  "confusion_matrix": [
+    [
+      51,
+      1
+    ],
+    [
+      78,
+      0
+    ]
+  ],
+  "threshold": 0.5,
+  "auc_roc": 0.5564595660749507,
+  "auc_pr": 0.6388191040807855
+}

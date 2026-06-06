@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import textwrap
 from pathlib import Path
 from typing import Iterable
 
@@ -394,12 +395,21 @@ def graph_dolos_method_comparison(out_dir: Path, dpi: int) -> None:
     data["percent"] = pct(data["value"])
     labels = {"auc_roc": "AUC", "calibrated_balanced_accuracy": "Cal. BA", "calibrated_f1_lie": "Cal. F1 Lie"}
     data["metric"] = data["metric"].map(labels)
-    fig, ax = plt.subplots(figsize=(13, 5))
+    fig, ax = plt.subplots(figsize=(14.5, 6))
     sns.barplot(data=data, x="method_label", y="percent", hue="metric", ax=ax, palette=[COLORS["blue"], COLORS["green"], COLORS["orange"]], errorbar=None)
     ax.set_title("DOLOS 3-Fold Mean: Method Comparison")
     ax.set_xlabel("")
     ax.set_ylabel("Score (%)")
-    ax.tick_params(axis="x", rotation=18)
+    ax.set_ylim(0, max(70, data["percent"].max() + 8))
+    ax.set_xticks(ax.get_xticks(), [textwrap.fill(label.get_text(), 18) for label in ax.get_xticklabels()], rotation=0, ha="center")
+    ax.legend(
+        title="",
+        loc="center left",
+        bbox_to_anchor=(1.01, 0.5),
+        ncol=1,
+        frameon=False,
+        borderaxespad=0.0,
+    )
     save(fig, out_dir, "graph02_dolos_method_comparison", dpi)
 
 
@@ -490,12 +500,21 @@ def graph_stream_ablation(out_dir: Path, dpi: int) -> None:
             "calibrated_balanced_accuracy": "Cal. BA",
         }
     )
-    fig, ax = plt.subplots(figsize=(13, 5))
+    fig, ax = plt.subplots(figsize=(14.5, 6))
     sns.barplot(data=data, x="stream_label", y="percent", hue="metric", ax=ax, palette=[COLORS["purple"], COLORS["blue"], COLORS["green"]], errorbar=None)
     ax.set_title("Fold3 Stream Ablation")
     ax.set_xlabel("")
     ax.set_ylabel("Score (%)")
-    ax.tick_params(axis="x", rotation=15)
+    ax.set_ylim(0, max(75, data["percent"].max() + 8))
+    ax.set_xticks(ax.get_xticks(), [textwrap.fill(label.get_text(), 16) for label in ax.get_xticklabels()], rotation=0, ha="center")
+    ax.legend(
+        title="",
+        loc="center left",
+        bbox_to_anchor=(1.01, 0.5),
+        ncol=1,
+        frameon=False,
+        borderaxespad=0.0,
+    )
     save(fig, out_dir, "graph05_stream_ablation", dpi)
 
 

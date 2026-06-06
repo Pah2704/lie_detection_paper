@@ -112,6 +112,19 @@ def build_model(config: dict[str, Any]) -> ThreeStreamModel:
         stream_logit_temperature=tuple(float(value) for value in model_cfg.get("stream_logit_temperature", [])) or None,
         logit_fusion_mode=str(model_cfg.get("logit_fusion_mode", "weighted_logits")),
         margin_clip=float(model_cfg["margin_clip"]) if "margin_clip" in model_cfg else None,
+        reliability_confidence_gamma=float(model_cfg.get("reliability_confidence_gamma", 1.0)),
+        reliability_confidence_floor=float(model_cfg.get("reliability_confidence_floor", 0.0)),
+        reliability_confidence_max_weight=(
+            None
+            if model_cfg.get("reliability_confidence_max_weight") is None
+            else float(model_cfg["reliability_confidence_max_weight"])
+        ),
+        majority_consistency_margin=(
+            None if model_cfg.get("majority_consistency_margin") is None else float(model_cfg["majority_consistency_margin"])
+        ),
+        vote_consensus_bonus=float(model_cfg.get("vote_consensus_bonus", 0.0)),
+        audio_reliability=float(model_cfg.get("audio_reliability", 1.0)),
+        confidence_detach=bool(model_cfg.get("confidence_detach", True)),
         use_temporal_positional_encoding=bool(model_cfg.get("use_temporal_positional_encoding", False)),
         local_attention_radius=(
             int(model_cfg["local_attention_radius"]) if model_cfg.get("local_attention_radius") is not None else None
@@ -148,13 +161,52 @@ def gate_entropy(gate_weights: torch.Tensor) -> torch.Tensor:
     return -(gate_weights.clamp_min(1e-8).log() * gate_weights).sum(dim=1).mean()
 
 
+def normalized_prior_tensor(
+    weights: tuple[float, ...],
+    gate_weights: torch.Tensor,
+) -> torch.Tensor:
+    prior = torch.tensor(weights, dtype=gate_weights.dtype, device=gate_weights.device)
+    if prior.numel() != gate_weights.size(1) or torch.any(prior <= 0):
+        raise ValueError(f"Gate prior must contain {gate_weights.size(1)} positive values.")
+    return prior / prior.sum().clamp_min(1e-8)
+
+
+def adaptive_gate_prior(
+    gate_weights: torch.Tensor,
+    face_valid: torch.Tensor | None,
+    low_face_weights: tuple[float, ...],
+    high_face_weights: tuple[float, ...],
+    face_power: float = 1.0,
+) -> torch.Tensor:
+    low = normalized_prior_tensor(low_face_weights, gate_weights)
+    high = normalized_prior_tensor(high_face_weights, gate_weights)
+    if face_valid is None:
+        strength = torch.full((gate_weights.size(0), 1), 0.5, dtype=gate_weights.dtype, device=gate_weights.device)
+    else:
+        strength = face_valid.to(gate_weights.device, gate_weights.dtype).view(-1, 1).clamp(0.0, 1.0)
+    if face_power <= 0.0:
+        raise ValueError("training.gate_prior_face_power must be positive.")
+    strength = strength.pow(face_power)
+    prior = low.view(1, -1) + strength * (high.view(1, -1) - low.view(1, -1))
+    return prior / prior.sum(dim=1, keepdim=True).clamp_min(1e-8)
+
+
 def gate_prior_kl(
     gate_weights: torch.Tensor,
-    prior_weights: tuple[float, ...],
+    prior_weights: tuple[float, ...] | torch.Tensor,
     sample_weight: torch.Tensor | None = None,
 ) -> torch.Tensor:
-    prior = torch.tensor(prior_weights, dtype=gate_weights.dtype, device=gate_weights.device)
-    prior = prior / prior.sum()
+    if isinstance(prior_weights, torch.Tensor):
+        prior = prior_weights.to(device=gate_weights.device, dtype=gate_weights.dtype)
+        if prior.dim() == 1:
+            prior = prior.view(1, -1)
+        if prior.shape[-1] != gate_weights.size(1):
+            raise ValueError(f"Gate prior must have {gate_weights.size(1)} streams, got {prior.shape[-1]}.")
+        if prior.size(0) not in {1, gate_weights.size(0)} or torch.any(prior <= 0):
+            raise ValueError("Gate prior tensor must be [streams] or [batch, streams] with positive values.")
+        prior = prior / prior.sum(dim=1, keepdim=True).clamp_min(1e-8)
+    else:
+        prior = normalized_prior_tensor(prior_weights, gate_weights).view(1, -1)
     per_sample = (gate_weights * (gate_weights.clamp_min(1e-8).log() - prior.clamp_min(1e-8).log())).sum(dim=1)
     if sample_weight is None:
         return per_sample.mean()
@@ -201,6 +253,11 @@ def training_loss_from_output(
     gate_prior_weight: float = 0.0,
     gate_prior_weights: tuple[float, ...] = (),
     aux_loss_weights: tuple[float, float, float] | None = None,
+    gate_prior_mode: str = "fixed",
+    gate_prior_low_face_weights: tuple[float, ...] = (),
+    gate_prior_high_face_weights: tuple[float, ...] = (),
+    gate_prior_face_power: float = 1.0,
+    gate_prior_sample_weight: str = "face_valid",
 ) -> tuple[torch.Tensor, torch.Tensor]:
     if isinstance(output, torch.Tensor):
         return criterion(output, labels), output
@@ -216,8 +273,32 @@ def training_loss_from_output(
     if gate_entropy_weight != 0.0 and "gate_weights" in output:
         # Positive weights maximize entropy, discouraging hard early stream collapse.
         loss = loss - gate_entropy_weight * gate_entropy(output["gate_weights"])
-    if gate_prior_weight > 0.0 and gate_prior_weights and "gate_weights" in output:
-        loss = loss + gate_prior_weight * gate_prior_kl(output["gate_weights"], gate_prior_weights, face_valid)
+    if gate_prior_weight > 0.0 and "gate_weights" in output:
+        mode = gate_prior_mode.lower().strip()
+        sample_weight_mode = gate_prior_sample_weight.lower().strip()
+        sample_weight = face_valid if sample_weight_mode in {"face_valid", "face-valid", "valid"} else None
+        if sample_weight_mode not in {"none", "off", "disabled", "face_valid", "face-valid", "valid"}:
+            raise ValueError(f"Unsupported training.gate_prior_sample_weight: {gate_prior_sample_weight}")
+        if mode in {"fixed", "static"}:
+            if not gate_prior_weights:
+                raise ValueError("training.gate_prior_weights is required when gate_prior_mode=fixed.")
+            prior = gate_prior_weights
+        elif mode in {"face_valid_adaptive", "adaptive", "face-valid-adaptive"}:
+            if not gate_prior_low_face_weights or not gate_prior_high_face_weights:
+                raise ValueError(
+                    "training.gate_prior_low_face_weights and gate_prior_high_face_weights are required "
+                    "when gate_prior_mode=face_valid_adaptive."
+                )
+            prior = adaptive_gate_prior(
+                output["gate_weights"],
+                face_valid,
+                gate_prior_low_face_weights,
+                gate_prior_high_face_weights,
+                gate_prior_face_power,
+            )
+        else:
+            raise ValueError(f"Unsupported training.gate_prior_mode: {gate_prior_mode}")
+        loss = loss + gate_prior_weight * gate_prior_kl(output["gate_weights"], prior, sample_weight)
     return loss, logits
 
 
@@ -236,6 +317,11 @@ def train_one_epoch(
     gate_prior_weights: tuple[float, ...] = (),
     aux_loss_weights: tuple[float, float, float] | None = None,
     face_valid_mode: str = "binary",
+    gate_prior_mode: str = "fixed",
+    gate_prior_low_face_weights: tuple[float, ...] = (),
+    gate_prior_high_face_weights: tuple[float, ...] = (),
+    gate_prior_face_power: float = 1.0,
+    gate_prior_sample_weight: str = "face_valid",
 ) -> float:
     model.train()
     total_loss = 0.0
@@ -265,6 +351,11 @@ def train_one_epoch(
                 gate_prior_weight,
                 gate_prior_weights,
                 aux_loss_weights,
+                gate_prior_mode,
+                gate_prior_low_face_weights,
+                gate_prior_high_face_weights,
+                gate_prior_face_power,
+                gate_prior_sample_weight,
             )
             loss = loss / accumulation_steps
         scaler.scale(loss).backward()
@@ -520,14 +611,28 @@ def train(
         raise ValueError("training.aux_loss_weights must contain three values: spatial, flow, audio.")
     gate_entropy_weight = float(config["training"].get("gate_entropy_weight", 0.0))
     gate_prior_weight = float(config["training"].get("gate_prior_weight", 0.0))
+    gate_prior_mode = str(config["training"].get("gate_prior_mode", "fixed"))
     gate_prior_weights = tuple(float(value) for value in config["training"].get("gate_prior_weights", []))
+    gate_prior_low_face_weights = tuple(float(value) for value in config["training"].get("gate_prior_low_face_weights", []))
+    gate_prior_high_face_weights = tuple(float(value) for value in config["training"].get("gate_prior_high_face_weights", []))
+    gate_prior_face_power = float(config["training"].get("gate_prior_face_power", 1.0))
+    gate_prior_sample_weight = str(config["training"].get("gate_prior_sample_weight", "face_valid"))
     face_valid_mode = str(config["data"].get("face_valid_mode", "binary"))
     logger.info("Checkpoint selection metric=%s", selection_metric_key)
     logger.info("Threshold calibration metric=%s", threshold_metric)
     logger.info("Face-valid mode=%s", face_valid_mode)
     logger.info("Feature norm logging=%s batches=%d", log_feature_norms, feature_norm_batches)
     logger.info("Aux loss weight=%.4f aux loss weights=%s gate entropy weight=%.4f", aux_loss_weight, aux_loss_weights, gate_entropy_weight)
-    logger.info("Gate prior weight=%.4f gate prior weights=%s", gate_prior_weight, gate_prior_weights)
+    logger.info(
+        "Gate prior mode=%s weight=%.4f weights=%s low_face=%s high_face=%s face_power=%.4f sample_weight=%s",
+        gate_prior_mode,
+        gate_prior_weight,
+        gate_prior_weights,
+        gate_prior_low_face_weights,
+        gate_prior_high_face_weights,
+        gate_prior_face_power,
+        gate_prior_sample_weight,
+    )
     log_path = ensure_dir(config["outputs"]["log_dir"]) / f"{fold}_seed{seed}_{selection_metric_key}_train_log.csv"
     best_path = out_dir / f"{fold}_seed{seed}_best.pt"
     run = maybe_init_wandb(config, disable_wandb, logger)
@@ -552,6 +657,11 @@ def train(
             gate_prior_weights,
             aux_loss_weights,
             face_valid_mode,
+            gate_prior_mode,
+            gate_prior_low_face_weights,
+            gate_prior_high_face_weights,
+            gate_prior_face_power,
+            gate_prior_sample_weight,
         )
         scheduler.step(epoch)
         val_windows = predict_windows(model, val_loader, device, amp, face_valid_mode)

@@ -326,6 +326,13 @@ class GatedLogitFusion(nn.Module):
         stream_logit_temperature: tuple[float, float, float] | None = None,
         logit_fusion_mode: str = "weighted_logits",
         margin_clip: float | None = None,
+        reliability_confidence_gamma: float = 1.0,
+        reliability_confidence_floor: float = 0.0,
+        reliability_confidence_max_weight: float | None = None,
+        majority_consistency_margin: float | None = None,
+        vote_consensus_bonus: float = 0.0,
+        audio_reliability: float = 1.0,
+        confidence_detach: bool = True,
     ) -> None:
         super().__init__()
         self.spatial_head = SingleStreamTemporalHead(dim, lstm_hidden, lstm_layers)
@@ -348,9 +355,31 @@ class GatedLogitFusion(nn.Module):
             raise ValueError("stream_logit_temperature must contain three positive values.")
         self.register_buffer("stream_logit_temperature", temperatures.view(1, 3, 1), persistent=False)
         self.logit_fusion_mode = logit_fusion_mode.lower()
-        if self.logit_fusion_mode not in {"weighted_logits", "normalized_margin"}:
+        if self.logit_fusion_mode not in {"weighted_logits", "normalized_margin", "reliability_confidence", "vote_score_sum"}:
             raise ValueError(f"Unsupported logit_fusion_mode: {logit_fusion_mode}")
         self.margin_clip = margin_clip
+        self.reliability_confidence_gamma = float(reliability_confidence_gamma)
+        if self.reliability_confidence_gamma <= 0.0:
+            raise ValueError("reliability_confidence_gamma must be positive.")
+        self.reliability_confidence_floor = float(reliability_confidence_floor)
+        if self.reliability_confidence_floor < 0.0:
+            raise ValueError("reliability_confidence_floor must be non-negative.")
+        self.reliability_confidence_max_weight = (
+            None if reliability_confidence_max_weight is None else float(reliability_confidence_max_weight)
+        )
+        if self.reliability_confidence_max_weight is not None:
+            if self.reliability_confidence_max_weight < (1.0 / 3.0) or self.reliability_confidence_max_weight > 1.0:
+                raise ValueError("reliability_confidence_max_weight must be in [1/3, 1].")
+        self.majority_consistency_margin = None if majority_consistency_margin is None else float(majority_consistency_margin)
+        if self.majority_consistency_margin is not None and self.majority_consistency_margin < 0.0:
+            raise ValueError("majority_consistency_margin must be non-negative.")
+        self.vote_consensus_bonus = float(vote_consensus_bonus)
+        if self.vote_consensus_bonus < 0.0:
+            raise ValueError("vote_consensus_bonus must be non-negative.")
+        self.audio_reliability = float(audio_reliability)
+        if self.audio_reliability < 0.0:
+            raise ValueError("audio_reliability must be non-negative.")
+        self.confidence_detach = bool(confidence_detach)
 
     def _init_gate(self, gate_init_weights: tuple[float, float, float] | None) -> None:
         final = self.gate[-1]
@@ -390,14 +419,136 @@ class GatedLogitFusion(nn.Module):
     def _calibrate_stream_logits(self, stream_logits: torch.Tensor) -> torch.Tensor:
         return stream_logits / self.stream_logit_temperature.to(stream_logits.device, stream_logits.dtype)
 
+    def _apply_reliability_confidence_cap(self, weights: torch.Tensor) -> torch.Tensor:
+        if self.reliability_confidence_max_weight is None:
+            return weights
+        cap = torch.full_like(weights, self.reliability_confidence_max_weight)
+        capped = weights
+        locked = torch.zeros_like(weights, dtype=torch.bool)
+        zeros = torch.zeros_like(weights)
+        for _ in range(weights.size(1)):
+            active = ~locked
+            locked_sum = torch.where(locked, capped, zeros).sum(dim=1, keepdim=True)
+            remaining = (1.0 - locked_sum).clamp_min(0.0)
+            active_base = torch.where(active, weights, zeros)
+            active_sum = active_base.sum(dim=1, keepdim=True)
+            active_count = active.sum(dim=1, keepdim=True).to(dtype=weights.dtype).clamp_min(1.0)
+            redistributed = active_base / active_sum.clamp_min(FACE_VALID_EPS) * remaining
+            uniform = active.to(dtype=weights.dtype) * (remaining / active_count)
+            capped = torch.where(active, torch.where(active_sum > FACE_VALID_EPS, redistributed, uniform), capped)
+            over_cap = (capped > cap) & active
+            capped = torch.where(over_cap, cap, capped)
+            locked = locked | over_cap
+        return capped / capped.sum(dim=1, keepdim=True).clamp_min(FACE_VALID_EPS)
+
+    def _apply_majority_consistency(
+        self,
+        logits: torch.Tensor,
+        calibrated_stream_logits: torch.Tensor,
+    ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
+        if self.majority_consistency_margin is None:
+            return logits, {}
+        lie_votes = (calibrated_stream_logits[:, :, 1] >= calibrated_stream_logits[:, :, 0]).to(logits.dtype).sum(dim=1)
+        majority_sign = torch.where(
+            lie_votes >= 2.0,
+            torch.ones_like(lie_votes),
+            -torch.ones_like(lie_votes),
+        )
+        fused_margin = logits[:, 1] - logits[:, 0]
+        adjusted_margin = majority_sign * fused_margin.abs().clamp_min(self.majority_consistency_margin)
+        adjusted_logits = torch.stack([-0.5 * adjusted_margin, 0.5 * adjusted_margin], dim=1)
+        applied = (fused_margin.sign() != majority_sign).to(logits.dtype)
+        return adjusted_logits, {
+            "majority_lie_votes": lie_votes,
+            "majority_consistency_applied": applied,
+            "majority_margin": adjusted_margin,
+        }
+
     def _fuse_stream_logits(
         self,
         calibrated_stream_logits: torch.Tensor,
         gate_weights: torch.Tensor,
+        visual_reliability: torch.Tensor | None = None,
     ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
         if self.logit_fusion_mode == "weighted_logits":
             logits = torch.sum(gate_weights.unsqueeze(-1) * calibrated_stream_logits, dim=1)
             return logits, {}
+
+        if self.logit_fusion_mode in {"reliability_confidence", "vote_score_sum"}:
+            probabilities = torch.softmax(calibrated_stream_logits, dim=-1)
+            if visual_reliability is None:
+                visual = torch.ones(
+                    (calibrated_stream_logits.size(0), 1),
+                    device=calibrated_stream_logits.device,
+                    dtype=calibrated_stream_logits.dtype,
+                )
+            else:
+                visual = visual_reliability.to(calibrated_stream_logits.device, calibrated_stream_logits.dtype).view(-1, 1).clamp(0.0, 1.0)
+            audio = torch.full_like(visual, self.audio_reliability)
+            reliability = torch.cat([visual, visual, audio], dim=1)
+
+        if self.logit_fusion_mode == "reliability_confidence":
+            confidence = (probabilities[:, :, 1] - 0.5).abs()
+            confidence = confidence.pow(self.reliability_confidence_gamma)
+            confidence_for_weight = confidence + self.reliability_confidence_floor
+            if self.confidence_detach:
+                confidence = confidence.detach()
+                confidence_for_weight = confidence_for_weight.detach()
+                reliability = reliability.detach()
+            raw_weights = reliability * confidence_for_weight
+            weight_sum = raw_weights.sum(dim=1, keepdim=True)
+            confidence_weights = raw_weights / weight_sum.clamp_min(FACE_VALID_EPS)
+            capped_weights = self._apply_reliability_confidence_cap(confidence_weights)
+            fallback = weight_sum <= FACE_VALID_EPS
+            fusion_weights = torch.where(fallback, gate_weights, capped_weights)
+            logits = torch.sum(fusion_weights.unsqueeze(-1) * calibrated_stream_logits, dim=1)
+            logits, majority_features = self._apply_majority_consistency(logits, calibrated_stream_logits)
+            return logits, {
+                "fusion_weights": fusion_weights,
+                "fusion_weights_uncapped": confidence_weights,
+                "fusion_cap_active": (capped_weights - confidence_weights).abs().sum(dim=1),
+                "fusion_confidence": confidence,
+                "fusion_confidence_for_weight": confidence_for_weight,
+                "fusion_reliability": reliability,
+                "fusion_raw_weights": raw_weights,
+                "fusion_weight_sum": weight_sum.squeeze(1),
+                "learned_gate_weights": gate_weights,
+                **majority_features,
+            }
+
+        if self.logit_fusion_mode == "vote_score_sum":
+            vote_class = probabilities.argmax(dim=-1)
+            vote_probability = probabilities.gather(2, vote_class.unsqueeze(-1)).squeeze(-1)
+            # Keep support differentiable; in this mode support itself forms the final logit.
+            vote_support = reliability.detach() * (self.reliability_confidence_floor + vote_probability.pow(self.reliability_confidence_gamma))
+            lie_mask = (vote_class == 1).to(calibrated_stream_logits.dtype)
+            truth_mask = 1.0 - lie_mask
+            lie_support = (vote_support * lie_mask).sum(dim=1)
+            truth_support = (vote_support * truth_mask).sum(dim=1)
+            lie_vote_count = lie_mask.sum(dim=1)
+            truth_vote_count = truth_mask.sum(dim=1)
+            if self.vote_consensus_bonus > 0.0:
+                lie_bonus = 1.0 + self.vote_consensus_bonus * (lie_vote_count - 1.0).clamp_min(0.0)
+                truth_bonus = 1.0 + self.vote_consensus_bonus * (truth_vote_count - 1.0).clamp_min(0.0)
+                lie_support = lie_support * lie_bonus
+                truth_support = truth_support * truth_bonus
+            vote_margin = lie_support - truth_support
+            logits = torch.stack([-0.5 * vote_margin, 0.5 * vote_margin], dim=1)
+            support_sum = vote_support.sum(dim=1, keepdim=True)
+            support_weights = vote_support / support_sum.clamp_min(FACE_VALID_EPS)
+            return logits, {
+                "fusion_weights": support_weights,
+                "vote_class": vote_class.to(calibrated_stream_logits.dtype),
+                "vote_probability": vote_probability,
+                "vote_support": vote_support,
+                "vote_lie_support": lie_support,
+                "vote_truth_support": truth_support,
+                "vote_lie_count": lie_vote_count,
+                "vote_truth_count": truth_vote_count,
+                "vote_margin": vote_margin,
+                "fusion_reliability": reliability.detach(),
+                "learned_gate_weights": gate_weights,
+            }
 
         stream_margins = calibrated_stream_logits[:, :, 1] - calibrated_stream_logits[:, :, 0]
         margin_scale = torch.sqrt(torch.mean(stream_margins.square(), dim=1, keepdim=True)).clamp_min(1e-4)
@@ -442,16 +593,19 @@ class GatedLogitFusion(nn.Module):
         gate_weights = torch.softmax(dropped_gate_logits, dim=-1)
         stream_logits = torch.stack([logits_spatial, logits_flow, logits_audio], dim=1)
         calibrated_stream_logits = self._calibrate_stream_logits(stream_logits)
-        logits, margin_features = self._fuse_stream_logits(calibrated_stream_logits, gate_weights)
+        logits, margin_features = self._fuse_stream_logits(calibrated_stream_logits, gate_weights, valid)
+        effective_gate_weights = margin_features.get("fusion_weights", gate_weights)
 
         aux = {
             "logits": logits,
             "logits_spatial": logits_spatial,
             "logits_flow": logits_flow,
             "logits_audio": logits_audio,
-            "gate_weights": gate_weights,
+            "gate_weights": effective_gate_weights,
             "gate_logits": gate_logits,
         }
+        if "learned_gate_weights" in margin_features:
+            aux["learned_gate_weights"] = margin_features["learned_gate_weights"]
         if valid_score is not None:
             aux["face_valid"] = valid_score.to(device=gate_logits.device, dtype=gate_logits.dtype).view(-1)
         if return_features:
@@ -467,10 +621,10 @@ class GatedLogitFusion(nn.Module):
                 "calibrated_logits_flow": calibrated_stream_logits[:, 1],
                 "calibrated_logits_audio": calibrated_stream_logits[:, 2],
                 "gate_logits": gate_logits,
-                "gate_weights": gate_weights,
-                "gate_spatial": gate_weights[:, 0],
-                "gate_flow": gate_weights[:, 1],
-                "gate_audio": gate_weights[:, 2],
+                "gate_weights": effective_gate_weights,
+                "gate_spatial": effective_gate_weights[:, 0],
+                "gate_flow": effective_gate_weights[:, 1],
+                "gate_audio": effective_gate_weights[:, 2],
                 **margin_features,
             }
             if valid_score is not None:
@@ -500,6 +654,13 @@ class ThreeStreamModel(nn.Module):
         stream_logit_temperature: tuple[float, float, float] | None = None,
         logit_fusion_mode: str = "weighted_logits",
         margin_clip: float | None = None,
+        reliability_confidence_gamma: float = 1.0,
+        reliability_confidence_floor: float = 0.0,
+        reliability_confidence_max_weight: float | None = None,
+        majority_consistency_margin: float | None = None,
+        vote_consensus_bonus: float = 0.0,
+        audio_reliability: float = 1.0,
+        confidence_detach: bool = True,
         use_temporal_positional_encoding: bool = False,
         local_attention_radius: int | None = None,
         temporal_position_scale: float = 1.0,
@@ -545,6 +706,13 @@ class ThreeStreamModel(nn.Module):
                 stream_logit_temperature,
                 logit_fusion_mode,
                 margin_clip,
+                reliability_confidence_gamma,
+                reliability_confidence_floor,
+                reliability_confidence_max_weight,
+                majority_consistency_margin,
+                vote_consensus_bonus,
+                audio_reliability,
+                confidence_detach,
             )
             if self.stream_mode == "gated"
             else None

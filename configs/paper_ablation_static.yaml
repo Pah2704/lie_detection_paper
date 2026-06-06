@@ -1,0 +1,66 @@
+experiment:
+  name: paper_ablation_static
+  seed: 42
+  seeds: [42]
+
+data:
+  dolos_root: data/DOLOS
+  dolos_timestamps_csv: data/DOLOS/dolos_timestamps.csv
+  dolos_protocol_dir: data/DOLOS/Training_Protocols
+  dolos_video_dir: data/raw/dolos/videos
+  split_dir: data/processed/splits/dolos/cache_filtered
+  train_csv: data/processed/splits/dolos/fold1_train.csv
+  val_csv: data/processed/splits/dolos/fold1_val.csv
+  test_csv: data/processed/splits/dolos/fold1_test.csv
+  audio_dir: data/processed/audio
+  faces_dir: data/processed/faces_224_clean
+  face_valid_root: data/processed/faces_224_clean/dolos/face_valid
+  optflow_dir: data/processed/optflow_clean
+  use_face_valid_mask: true
+  face_valid_mode: ratio
+  min_window_face_valid_ratio: 0.75
+  frames_per_clip: 16
+  window_seconds: 2.0
+  num_windows_per_clip_train: 3
+  sliding_stride_seconds: 1.0
+  max_windows_per_clip: 16
+  speed_perturb_range: [0.9, 1.1]
+  image_size: 224
+  sample_rate: 16000
+  num_workers: 4
+
+model:
+  vit_name: LaurenGurgiolo/vit-micro-facial-expressions
+  wav2vec_name: facebook/wav2vec2-base
+  projection_dim: 256
+  lstm_hidden_dim: 128
+  lstm_layers: 2
+  attention_heads: 4
+  freeze_vit: true
+  freeze_wav2vec: true
+  stream_mode: spatial
+
+training:
+  batch_size: 4
+  gradient_accumulation: 4
+  max_epochs: 50
+  early_stopping_metric: val_auc_roc
+  threshold_calibration_metric: balanced_accuracy
+  early_stopping_patience: 10
+  optimizer: adamw
+  lr_head: 0.001
+  lr_unfrozen_backbone: 0.00001
+  weight_decay: 0.01
+  scheduler: cosine_warmup
+  warmup_epochs: 3
+  loss: auto
+  focal_loss_gamma: 2.0
+  amp: true
+  log_feature_norms: true
+  feature_norm_batches: 1
+
+outputs:
+  checkpoint_dir: outputs/checkpoints/paper_ablation_static
+  metrics_dir: outputs/metrics/paper_ablation_static
+  log_dir: outputs/logs/paper_ablation_static
+  wandb_project: lie-nonlie-multimodal
