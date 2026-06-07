@@ -5,6 +5,7 @@ Source configs:
 - Single-stream: `configs/paper_ablation_static.yaml`, `configs/paper_ablation_flow.yaml`, `configs/paper_ablation_audio.yaml`.
 - Prior comparison: `configs/paper_gated_neutral_no_prior.yaml`, `configs/paper_gated_no_prior.yaml`, `configs/paper_gated_prior_kl.yaml`.
 - Exploratory vote-score-sum: `configs/paper_gated_vote_score_sum_g05_floor005.yaml`.
+- Focal pilot: `configs/paper_gated_vote_score_sum_g05_floor005_focal.yaml`.
 
 ## How to Read for Paper
 
@@ -27,13 +28,13 @@ Main-method interpretation after the vote-score-sum expansion:
 - It is also stronger than prior-init w/o Prior-KL on AUC (+1.86 pp), Cal. BA (+1.74 pp), Cal. F1 Lie (+5.77 pp), and Cal. Macro F1 (+2.70 pp).
 - Its weak point is raw threshold-0.5 Lie F1, mainly because some runs are poorly calibrated at 0.5 despite good AUC. Use validation-calibrated threshold metrics for the operating-point claim.
 
-## Single-Stream Fold1-Fold2
+## Single-Stream Fold1-Fold3
 
 | Method | Runs | Folds | Seeds | AUC | BA@0.5 | Cal. BA | Cal. F1 Lie | Cal. Macro F1 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Static only | 2 | fold1,fold2 | 42 | 66.32 +- 0.07 | 60.92 +- 1.32 | 61.40 +- 2.33 | 57.39 +- 7.41 | 60.38 +- 3.51 |
-| Flow only | 2 | fold1,fold2 | 42 | 57.90 +- 5.27 | 50.11 +- 0.09 | 56.06 +- 4.43 | 53.93 +- 10.80 | 55.35 +- 5.44 |
-| Audio only | 2 | fold1,fold2 | 42 | 58.72 +- 3.11 | 52.09 +- 2.95 | 57.10 +- 2.14 | 56.62 +- 2.70 | 56.72 +- 1.60 |
+| Static only | 3 | fold1,fold2,fold3 | 42 | 65.33 +- 1.71 | 59.16 +- 3.20 | 60.91 +- 1.86 | 54.39 +- 7.38 | 59.23 +- 3.18 |
+| Flow only | 3 | fold1,fold2,fold3 | 42 | 54.46 +- 7.03 | 50.07 +- 0.09 | 53.21 +- 5.85 | 50.39 +- 9.79 | 52.49 +- 6.28 |
+| Audio only | 3 | fold1,fold2,fold3 | 42 | 58.03 +- 2.50 | 51.39 +- 2.41 | 56.04 +- 2.38 | 53.09 +- 6.40 | 55.22 +- 2.84 |
 
 ## Prior-KL Contribution
 
@@ -216,6 +217,29 @@ Interpretation: the 3-seed expansion supports vote-score-sum as a stronger paper
 Important caveat: `F1 Lie@0.5` is unstable and lower than prior-init no-KL because vote-score-sum can produce poorly calibrated raw scores in some runs. The clearest case is `fold3 seed2025`, where AUC is high (68.60) but threshold 0.5 predicts almost all samples as Truth (F1 Lie 0.81); validation calibration fixes this run (Cal. F1 Lie 67.57, Cal. BA 63.34). For the paper, report calibrated threshold metrics as the operating point and discuss threshold sensitivity.
 
 Decision: use `vote_score_sum, gamma=0.5, floor=0.05, consensus_bonus=0.0` as the main proposed fusion method. Keep `Gated Prior-KL`, `Gated prior-init w/o Prior-KL`, and `Gated neutral no-prior` as baselines. Do not add `consensus_bonus=0.25` unless a later section explicitly studies calibration/threshold stability.
+
+## Focal Loss Pilot for Vote-Score-Sum
+
+This is a seed-42 pilot only. It keeps the main proposed fusion rule `vote_score_sum, gamma=0.5, floor=0.05, consensus_bonus=0.0` and changes the training loss from CE to focal loss using `configs/paper_gated_vote_score_sum_g05_floor005_focal.yaml`.
+
+Mean comparison against the CE version on the same seed and folds:
+
+| Method | Runs | Folds | Seeds | AUC | BA@0.5 | F1 Lie@0.5 | Macro F1@0.5 | Cal. BA | Cal. F1 Lie | Cal. Macro F1 |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Vote-score-sum CE | 3 | fold1,fold2,fold3 | 42 | 69.35 +- 0.81 | 61.88 +- 3.45 | 67.30 +- 4.85 | 60.41 +- 5.30 | 63.59 +- 1.56 | 63.18 +- 5.08 | 63.12 +- 1.85 |
+| Vote-score-sum focal | 3 | fold1,fold2,fold3 | 42 | 64.14 +- 3.88 | 54.55 +- 7.87 | 22.71 +- 39.34 | 42.50 +- 18.20 | 61.59 +- 2.22 | 59.01 +- 8.24 | 60.63 +- 2.98 |
+
+Fold-level focal details:
+
+| Fold | Best epoch | Val AUC | Test AUC | BA@0.5 | F1 Lie@0.5 | Cal. BA | Cal. F1 Lie | Cal. Macro F1 | Cal. threshold |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| fold1 | 5 | 60.20 | 61.09 | 50.00 | 0.00 | 59.90 | 56.70 | 59.15 | 0.2834 |
+| fold2 | 29 | 70.38 | 68.51 | 63.64 | 68.14 | 64.11 | 68.16 | 64.05 | 0.5129 |
+| fold3 | 17 | 62.82 | 62.82 | 50.00 | 0.00 | 60.77 | 52.17 | 58.68 | 0.3256 |
+
+Interpretation: focal loss should not be expanded to 3 seeds in its current form. It improves Fold2 Lie F1 but hurts Fold1 and Fold3 sharply at threshold 0.5, where both folds predict only Truth. Validation calibration partly recovers the operating point, but the calibrated mean is still below the CE vote-score-sum baseline. The split imbalance is also small in these folds, so focal class-alpha does not act as a strong Lie-class correction; it mainly emphasizes hard examples.
+
+Post-hoc calibration note: calibrating directly for `f1_lie` raises mean F1 Lie but lowers balanced and macro performance because the selected thresholds become very low and over-predict Lie. For the main paper table, keep balanced/macro-oriented calibrated metrics as the operating-point claim and discuss F1 Lie as a threshold-sensitive metric.
 
 ## Missing Runs
 

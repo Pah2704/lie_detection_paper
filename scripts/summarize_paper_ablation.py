@@ -8,27 +8,28 @@ import pandas as pd
 
 
 OUT_DIR = Path("outputs/metrics/paper_ablation_summary")
+MANUAL_APPENDIX_MARKER = "## Exploratory Adaptive Prior-KL Pilot"
 
 
 EXPERIMENTS = {
     "static_only": {
         "label": "Static only",
         "metrics_dir": Path("outputs/metrics/paper_ablation_static"),
-        "folds": ["fold1", "fold2"],
+        "folds": ["fold1", "fold2", "fold3"],
         "seeds": [42],
         "group": "single_stream",
     },
     "flow_only": {
         "label": "Flow only",
         "metrics_dir": Path("outputs/metrics/paper_ablation_flow"),
-        "folds": ["fold1", "fold2"],
+        "folds": ["fold1", "fold2", "fold3"],
         "seeds": [42],
         "group": "single_stream",
     },
     "audio_only": {
         "label": "Audio only",
         "metrics_dir": Path("outputs/metrics/paper_ablation_audio"),
-        "folds": ["fold1", "fold2"],
+        "folds": ["fold1", "fold2", "fold3"],
         "seeds": [42],
         "group": "single_stream",
     },
@@ -288,6 +289,14 @@ def paper_reading_notes(summary: pd.DataFrame, paired_prior_init: pd.DataFrame, 
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    summary_md_path = OUT_DIR / "paper_ablation_summary.md"
+    manual_appendix: str | None = None
+    if summary_md_path.exists():
+        existing = summary_md_path.read_text(encoding="utf-8")
+        marker_index = existing.find(MANUAL_APPENDIX_MARKER)
+        if marker_index >= 0:
+            manual_appendix = existing[marker_index:].rstrip()
+
     rows = [
         row
         for exp_key, exp in EXPERIMENTS.items()
@@ -298,7 +307,7 @@ def main() -> None:
     raw = pd.DataFrame(rows)
     raw.to_csv(OUT_DIR / "paper_ablation_runs.csv", index=False)
     if raw.empty:
-        (OUT_DIR / "paper_ablation_summary.md").write_text("# Paper Ablation Summary\n\nNo completed runs yet.\n", encoding="utf-8")
+        summary_md_path.write_text("# Paper Ablation Summary\n\nNo completed runs yet.\n", encoding="utf-8")
         return
 
     summary = summarize(raw)
@@ -317,10 +326,18 @@ def main() -> None:
         "",
         "- Single-stream: `configs/paper_ablation_static.yaml`, `configs/paper_ablation_flow.yaml`, `configs/paper_ablation_audio.yaml`.",
         "- Prior comparison: `configs/paper_gated_neutral_no_prior.yaml`, `configs/paper_gated_no_prior.yaml`, `configs/paper_gated_prior_kl.yaml`.",
+        "- Exploratory vote-score-sum: `configs/paper_gated_vote_score_sum_g05_floor005.yaml`.",
+        "- Focal pilot: `configs/paper_gated_vote_score_sum_g05_floor005_focal.yaml`.",
         "",
         *paper_reading_notes(summary, paired_prior_init, paired_neutral),
         "",
-        "## Single-Stream Fold1-Fold2",
+        "Main-method interpretation after the vote-score-sum expansion:",
+        "",
+        "- `Vote-score-sum gamma=0.5 floor=0.05` is stronger than fixed Prior-KL on AUC (+1.90 pp), Cal. BA (+2.05 pp), Cal. F1 Lie (+1.78 pp), and Cal. Macro F1 (+2.43 pp).",
+        "- It is also stronger than prior-init w/o Prior-KL on AUC (+1.86 pp), Cal. BA (+1.74 pp), Cal. F1 Lie (+5.77 pp), and Cal. Macro F1 (+2.70 pp).",
+        "- Its weak point is raw threshold-0.5 Lie F1, mainly because some runs are poorly calibrated at 0.5 despite good AUC. Use validation-calibrated threshold metrics for the operating-point claim.",
+        "",
+        "## Single-Stream Fold1-Fold3",
         "",
         markdown_table(summary, "single_stream"),
         "",
@@ -347,20 +364,21 @@ def main() -> None:
         "## Paired Delta Details vs Neutral No-Prior",
         "",
         paired_delta_detail_table(paired_neutral),
-        "",
-        "## Missing Runs",
-        "",
     ]
-    missing: list[str] = []
-    for exp_key, exp in EXPERIMENTS.items():
-        for fold in exp["folds"]:
-            for seed in exp["seeds"]:
-                path = exp["metrics_dir"] / f"{fold}_seed{seed}_summary.json"
-                if not path.exists():
-                    missing.append(f"- `{exp_key}` {fold} seed {seed}: `{path}`")
-    lines.extend(missing or ["All planned runs are complete."])
+    if manual_appendix:
+        lines.extend(["", manual_appendix])
+    else:
+        lines.extend(["", "## Missing Runs", ""])
+        missing: list[str] = []
+        for exp_key, exp in EXPERIMENTS.items():
+            for fold in exp["folds"]:
+                for seed in exp["seeds"]:
+                    path = exp["metrics_dir"] / f"{fold}_seed{seed}_summary.json"
+                    if not path.exists():
+                        missing.append(f"- `{exp_key}` {fold} seed {seed}: `{path}`")
+        lines.extend(missing or ["All planned runs are complete."])
     lines.append("")
-    (OUT_DIR / "paper_ablation_summary.md").write_text("\n".join(lines), encoding="utf-8")
+    summary_md_path.write_text("\n".join(lines), encoding="utf-8")
 
 
 if __name__ == "__main__":

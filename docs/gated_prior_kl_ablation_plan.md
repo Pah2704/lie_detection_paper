@@ -10,13 +10,13 @@ Muc tieu moi cua paper:
 
 ### Q1. Tung modality dong gop gi?
 
-Chay single-stream tren Fold1 va Fold2:
+Chay single-stream tren Fold1, Fold2 va Fold3:
 
 - Static/spatial face only.
 - Optical flow only.
 - Audio only.
 
-Bao cao trung binh Fold1-Fold2 cho:
+Bao cao trung binh Fold1-Fold3 cho:
 
 - AUC-ROC.
 - Balanced accuracy tai nguong 0.5.
@@ -24,11 +24,11 @@ Bao cao trung binh Fold1-Fold2 cho:
 - F1 Lie.
 - Macro F1.
 
-Ly do chi Fold1/Fold2:
+Ly do dung Fold1-Fold3:
 
-- Theo yeu cau hien tai.
-- Dung de chung minh tung luong tin hieu, khong dung thay ket qua chinh 3-fold.
-- Neu reviewer hoi, co the bo sung Fold3 vao supplementary sau.
+- Dong bo voi main gated experiments 3-fold.
+- Giam rui ro reviewer hoi vi sao single-stream chi co 2 folds.
+- Van dung seed 42 de giu chi phi tinh toan hop ly cho modality ablation.
 
 ### Q2. Prior-KL co dong gop that khong?
 
@@ -91,9 +91,9 @@ Tat ca thuc nghiem dung:
 
 | Experiment | Config | Folds | Seeds | Output |
 | --- | --- | --- | --- | --- |
-| Static only | `configs/paper_ablation_static.yaml` | fold1, fold2 | 42 | `outputs/metrics/paper_ablation_static` |
-| Flow only | `configs/paper_ablation_flow.yaml` | fold1, fold2 | 42 | `outputs/metrics/paper_ablation_flow` |
-| Audio only | `configs/paper_ablation_audio.yaml` | fold1, fold2 | 42 | `outputs/metrics/paper_ablation_audio` |
+| Static only | `configs/paper_ablation_static.yaml` | fold1, fold2, fold3 | 42 | `outputs/metrics/paper_ablation_static` |
+| Flow only | `configs/paper_ablation_flow.yaml` | fold1, fold2, fold3 | 42 | `outputs/metrics/paper_ablation_flow` |
+| Audio only | `configs/paper_ablation_audio.yaml` | fold1, fold2, fold3 | 42 | `outputs/metrics/paper_ablation_audio` |
 
 ### 3.2 Prior-KL contribution
 
@@ -104,7 +104,7 @@ Tat ca thuc nghiem dung:
 
 ## 4. Thu tu chay uu tien
 
-1. Chay single-stream Fold1/Fold2 de co bang modality ablation nhanh.
+1. Chay single-stream Fold1-Fold3 de co bang modality ablation dong bo voi main 3-fold.
 2. Chay gated no-prior seed 42 Fold1-Fold3 de co baseline truc tiep voi ket qua Prior-KL seed 42 hien co.
 3. Chay gated Prior-KL seed 123/2025 Fold1-Fold3.
 4. Chay gated no-prior seed 123/2025 Fold1-Fold3.
@@ -126,14 +126,14 @@ python scripts/summarize_paper_ablation.py
 
 ## 6. Bang du kien dua vao paper
 
-### Table A. Single-stream ablation, Fold1-Fold2 mean
+### Table A. Single-stream ablation, Fold1-Fold3 mean
 
 | Method | Folds | AUC | BA@0.5 | Cal. BA | F1 Lie | Macro F1 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Static only | 1-2 | TBD | TBD | TBD | TBD | TBD |
-| Flow only | 1-2 | TBD | TBD | TBD | TBD | TBD |
-| Audio only | 1-2 | TBD | TBD | TBD | TBD | TBD |
-| Gated Prior-KL | 1-2 | TBD | TBD | TBD | TBD | TBD |
+| Static only | 1-3 | TBD | TBD | TBD | TBD | TBD |
+| Flow only | 1-3 | TBD | TBD | TBD | TBD | TBD |
+| Audio only | 1-3 | TBD | TBD | TBD | TBD | TBD |
+| Gated Prior-KL | 1-3 | TBD | TBD | TBD | TBD | TBD |
 
 ### Table B. Prior-KL contribution, 3 folds x 3 seeds
 
