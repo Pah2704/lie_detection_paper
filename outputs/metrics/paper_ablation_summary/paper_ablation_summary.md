@@ -241,6 +241,38 @@ Interpretation: focal loss should not be expanded to 3 seeds in its current form
 
 Post-hoc calibration note: calibrating directly for `f1_lie` raises mean F1 Lie but lowers balanced and macro performance because the selected thresholds become very low and over-predict Lie. For the main paper table, keep balanced/macro-oriented calibrated metrics as the operating-point claim and discuss F1 Lie as a threshold-sensitive metric.
 
+## Early-Stopping and Consensus-Bonus Pilots
+
+These are seed-42 pilots only. Both keep the main vote-score-sum formulation (`gamma=0.5`, `floor=0.05`, CE loss). The two isolated changes are:
+
+- `paper_gated_vote_sum_earlystop_macro_f1`: changes only `training.early_stopping_metric` from `val_auc_roc` to `val_macro_f1`.
+- `paper_gated_vote_sum_bonus01`: changes only `model.vote_consensus_bonus` from `0.0` to `0.1`, while keeping early stopping on `val_auc_roc`.
+
+Mean comparison against the CE vote-score-sum seed-42 baseline:
+
+| Method | Runs | Folds | Seeds | AUC | BA@0.5 | F1 Lie@0.5 | Macro F1@0.5 | Cal. BA | Cal. F1 Lie | Cal. Macro F1 |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Vote-score-sum CE | 3 | fold1,fold2,fold3 | 42 | 69.35 +- 0.81 | 61.88 +- 3.45 | 67.30 +- 4.85 | 60.41 +- 5.30 | 63.59 +- 1.56 | 63.18 +- 5.08 | 63.12 +- 1.85 |
+| Early-stop macro F1 | 3 | fold1,fold2,fold3 | 42 | 66.58 +- 6.71 | 61.74 +- 5.21 | 62.97 +- 6.35 | 61.46 +- 5.11 | 59.57 +- 5.36 | 68.67 +- 1.91 | 56.93 +- 8.04 |
+| Consensus bonus 0.1 | 3 | fold1,fold2,fold3 | 42 | 65.81 +- 6.07 | 58.66 +- 5.67 | 48.78 +- 28.99 | 53.33 +- 11.84 | 59.43 +- 3.86 | 65.88 +- 6.32 | 58.43 +- 4.19 |
+
+Fold-level details:
+
+| Method | Fold | Best epoch | Val metric | Test AUC | BA@0.5 | F1 Lie@0.5 | Macro F1@0.5 | Cal. BA | Cal. F1 Lie | Cal. Macro F1 | Cal. threshold |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Early-stop macro F1 | fold1 | 4 | 55.42 macro | 58.85 | 55.97 | 55.97 | 55.78 | 53.83 | 68.16 | 48.46 | 0.2341 |
+| Early-stop macro F1 | fold2 | 9 | 61.20 macro | 70.04 | 63.12 | 68.35 | 62.89 | 60.45 | 70.79 | 57.85 | 0.3246 |
+| Early-stop macro F1 | fold3 | 9 | 57.67 macro | 70.86 | 66.12 | 64.59 | 65.70 | 64.45 | 67.07 | 64.46 | 0.4039 |
+| Consensus bonus 0.1 | fold1 | 11 | 66.19 AUC | 58.82 | 52.49 | 15.92 | 40.06 | 56.06 | 58.59 | 56.05 | 0.1640 |
+| Consensus bonus 0.1 | fold2 | 10 | 66.32 AUC | 68.90 | 63.64 | 59.73 | 62.81 | 58.61 | 69.22 | 55.97 | 0.1850 |
+| Consensus bonus 0.1 | fold3 | 23 | 65.66 AUC | 69.71 | 59.84 | 70.70 | 57.12 | 63.64 | 69.84 | 63.26 | 0.6495 |
+
+Interpretation: both pilots pass the narrow Cal. F1 Lie gate (`>=63`) and reduce Cal. F1 Lie standard deviation relative to the 9-run CE vote-score-sum baseline (`10.05`). However, this is not a clean improvement for the paper. Early stopping on macro F1 raises Cal. F1 Lie by selecting much lower thresholds, but it hurts Cal. BA (-4.02 pp vs CE seed-42), Cal. Macro F1 (-6.19 pp), and AUC (-2.77 pp). The low Fold1 threshold (0.2341) indicates a Lie-biased operating point rather than a better ranking model.
+
+Consensus bonus 0.1 is also not a good expansion candidate. It improves Fold3 calibrated F1 Lie, but Fold1 collapses at threshold 0.5 (F1 Lie 15.92), producing very high default-threshold variance. Its seed-42 mean is below CE on AUC (-3.54 pp), BA@0.5 (-3.22 pp), Macro F1@0.5 (-7.08 pp), Cal. BA (-4.16 pp), and Cal. Macro F1 (-4.69 pp).
+
+Decision: do not expand either pilot to seeds 123 and 2025. If the original narrow selection rule must be applied mechanically, `consensus_bonus=0.1` beats early-stop macro F1 on Cal. Macro F1 among the two pilots, but it is still worse than the CE vote-score-sum main method and should not replace it. Keep `vote_score_sum, gamma=0.5, floor=0.05, consensus_bonus=0.0, early_stopping_metric=val_auc_roc` as the main method.
+
 ## Missing Runs
 
-The original Prior-KL, neutral/prior-init no-prior, single-stream ablations, and `vote_score_sum, gamma=0.5, floor=0.05, consensus_bonus=0.0` 3-seed expansion are complete. No additional run is required before drafting the core ablation table.
+The original Prior-KL, neutral/prior-init no-prior, single-stream ablations, `vote_score_sum, gamma=0.5, floor=0.05, consensus_bonus=0.0` 3-seed expansion, focal-loss pilot, early-stop macro-F1 pilot, and consensus-bonus pilot are complete. No additional run is required before drafting the core ablation table.
